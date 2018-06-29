@@ -1,0 +1,32 @@
+language: bash
+
+services:
+  - docker
+
+env:
+  global:
+    - PYTHON36=3.6.6
+    - PYTHON35=3.5.5
+    - PYTHON34=3.4.8
+    - PYTHON27=2.7.15
+  matrix:
+    - PYTHON_VER="${PYTHON36}" TAGS=3.6,3,latest
+    - PYTHON_VER="${PYTHON35}" TAGS=3.5
+    - PYTHON_VER="${PYTHON34}" TAGS=3.4
+    - PYTHON_VER="${PYTHON27}" TAGS=2.7,2
+    - PYTHON_VER="${PYTHON36}" PYTHON_DEV=1 TAGS=3.6-dev,3-dev
+    - PYTHON_VER="${PYTHON35}" PYTHON_DEV=1 TAGS=3.5-dev
+    - PYTHON_VER="${PYTHON34}" PYTHON_DEV=1 TAGS=3.4-dev
+    - PYTHON_VER="${PYTHON27}" PYTHON_DEV=1 TAGS=2.7-dev,2-dev
+    - PYTHON_VER="${PYTHON36}" PYTHON_DEV=1 WODBY_USER_ID=501 WODBY_GROUP_ID=20 TAGS=3.6-dev-macos,3-dev-macos
+    - PYTHON_VER="${PYTHON35}" PYTHON_DEV=1 WODBY_USER_ID=501 WODBY_GROUP_ID=20 TAGS=3.5-dev-macos
+    - PYTHON_VER="${PYTHON34}" PYTHON_DEV=1 WODBY_USER_ID=501 WODBY_GROUP_ID=20 TAGS=3.4-dev-macos
+    - PYTHON_VER="${PYTHON27}" PYTHON_DEV=1 WODBY_USER_ID=501 WODBY_GROUP_ID=20 TAGS=2.7-dev-macos,2-dev-macos
+
+script:
+  - set -e
+  - travis_retry make
+  - make test
+
+after_success:
+  - . "${TRAVIS_BUILD_DIR}/release.sh"
