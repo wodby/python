@@ -56,7 +56,6 @@ init_git() {
 }
 
 process_templates() {
-    _gotpl "pip.conf.tpl" "/home/wodby/.pip/pip.conf"
     _gotpl "gunicorn.py.tpl" "/usr/local/etc/gunicorn/config.py"
 }
 

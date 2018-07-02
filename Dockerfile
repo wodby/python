@@ -29,13 +29,16 @@ ENV APP_ROOT="/var/www/html" \
     CONF_DIR="/var/www/conf" \
     FILES_DIR="/mnt/files" \
     SSHD_HOST_KEYS_DIR="/etc/ssh" \
-    PATH="${PATH}:/home/wodby/.local/bin" \
     ENV="/home/wodby/.shrc" \
     \
     GIT_USER_EMAIL="wodby@example.com" \
-    GIT_USER_NAME="wodby" \
-    \
-    GUNICORN_APP="main:app"
+    GIT_USER_NAME="wodby"
+
+ENV GUNICORN_APP="main:app" \
+    PIP_USER=1 \
+    PYTHONUSERBASE="${APP_ROOT}/.local"
+
+ENV PATH="${PATH}:${PYTHONUSERBASE}/bin"
 
 RUN set -xe; \
     \
