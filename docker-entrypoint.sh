@@ -79,19 +79,16 @@ exec_init_scripts
 
 if [[ $1 == "make" ]]; then
     exec "${@}" -f /usr/local/bin/actions.mk
+# Infinite loop with default command and missing requirements.txt.
+elif [[ "${@:1:3}" == "sudo -E /etc/init.d/gunicorn" && ! -f "requirements.txt" ]]; then
+    echo "File requirements.txt is missing in working dir ${PWD}"
+
+    trap cleanup SIGINT SIGTERM
+
+    while [ 1 ]; do
+        sleep 60 &
+        wait $!
+    done
 else
-    shell_commands=(sh /bin/sh bash /bin/bash)
-
-    if [[ "${shell_commands[*]}" =~ $1 || -f "requirements.txt" ]]; then
-        exec "${@}"
-    else
-        echo "File requirements.txt is missing in working dir ${PWD}"
-
-        trap cleanup SIGINT SIGTERM
-
-        while [ 1 ]; do
-            sleep 60 &
-            wait $!
-        done
-    fi
+    exec "${@}"
 fi
