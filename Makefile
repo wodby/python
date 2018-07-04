@@ -1,6 +1,6 @@
 -include env_make
 
-PYTHON_VER ?= 3.6.6
+PYTHON_VER ?= 3.7.0
 PYTHON_VER_MINOR ?= $(shell echo "${PYTHON_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
 REPO = wodby/python

@@ -29,15 +29,18 @@ About images:
 
 Supported tags and respective `Dockerfile` links:
 
-* `3.6`, `3`, `latest` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
+* `3.7`, `3`, `latest` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
+* `3.6` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `3.5` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `3.4` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `2.7`, `2` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/2.7/Dockerfile)
-* `3.6-dev`, `3-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
+* `3.7-dev`, `3-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
+* `3.6-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `3.5-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `3.4-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `2.7-dev`, `2-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/2.7/Dockerfile)
-* `3.6-dev-macos`, `3-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
+* `3.7-dev-macos`, `3-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
+* `3.6-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `3.5-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `3.4-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/3/Dockerfile)
 * `2.7-dev-macos`, `2-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/2.7/Dockerfile)
