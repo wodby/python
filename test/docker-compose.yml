@@ -2,7 +2,10 @@ version: "2"
 
 services:
   nginx:
-    image: wodby/python-nginx
+    image: wodby/nginx
+    environment:
+      NGINX_APP_SERVER_HOST: python
+      NGINX_APP_SERVER_PORT: 8000
     depends_on:
       - python
 
