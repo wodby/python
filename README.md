@@ -22,7 +22,7 @@
 
 About images:
 
-* All images are based on Alpine Linux
+* All images are based on Alpine Linux 3.8
 * [Travis CI builds](https://travis-ci.com/wodby/python) 
 * [Docker Hub](https://hub.docker.com/r/wodby/python) 
 * [`-dev`](#-dev-images) and [`-debug`](#-debug-images) images have a few differences
