@@ -101,7 +101,7 @@ Include all changes from `-dev` images and additionally:
 
 Default container user is `wodby:wodby` (UID/GID `1000`). Gunicorn runs from `www-data:www-data` user (UID/GID `82`) by default. User `wodby` is a part of `www-data` group.
 
-Codebase volume `$APP_ROOT` (`/var/www/html`) owned by `wodby:wodby`. Files volume `$FILES_DIR` (`/mnt/files`) owned by `www-data:www-data` with `775` mode.
+Codebase volume `$APP_ROOT` (`/usr/src/app`) owned by `wodby:wodby`. Files volume `$FILES_DIR` (`/mnt/files`) owned by `www-data:www-data` with `775` mode.
 
 #### Helper scripts 
 

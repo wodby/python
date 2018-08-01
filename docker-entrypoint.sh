@@ -16,21 +16,10 @@ _gotpl() {
 
 init_ssh_client() {
     _gotpl "ssh_config.tpl" "${ssh_dir}/config"
-
-    if [[ -n "${SSH_PRIVATE_KEY}" ]]; then
-        _gotpl "id_rsa.tpl" "${ssh_dir}/id_rsa"
-        chmod -f 600 "${ssh_dir}/id_rsa"
-        unset SSH_PRIVATE_KEY
-    fi
 }
 
 init_sshd() {
     _gotpl "sshd_config.tpl" "/etc/ssh/sshd_config"
-
-    if [[ -n "${SSH_PUBLIC_KEYS}" ]]; then
-        _gotpl "authorized_keys.tpl" "${ssh_dir}/authorized_keys"
-        unset SSH_PUBLIC_KEYS
-    fi
 
     printenv | xargs -I{} echo {} | awk ' \
         BEGIN { FS = "=" }; { \
@@ -44,10 +33,6 @@ init_sshd() {
         }' > "${ssh_dir}/environment"
 
     sudo gen_ssh_keys "rsa" "${SSHD_HOST_KEYS_DIR}"
-}
-
-init_crond() {
-    _gotpl "crontab.tpl" "/etc/crontabs/www-data"
 }
 
 init_git() {
@@ -70,8 +55,6 @@ process_templates
 
 if [[ "${@:1:2}" == "sudo /usr/sbin/sshd" ]]; then
     init_sshd
-elif [[ "${@:1:3}" == "sudo -E crond" ]]; then
-    init_crond
 fi
 
 exec_init_scripts

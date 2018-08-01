@@ -25,8 +25,8 @@ ENV PYTHON_DEV="${PYTHON_DEV}" \
     RABBITMQ_C_VER="0.8.0-r3" \
     YAML_VER="0.1.7-r0"
 
-ENV APP_ROOT="/var/www/html" \
-    CONF_DIR="/var/www/conf" \
+ENV APP_ROOT="/usr/src/app" \
+    CONF_DIR="/usr/src/app" \
     FILES_DIR="/mnt/files" \
     SSHD_HOST_KEYS_DIR="/etc/ssh" \
     ENV="/home/wodby/.shrc" \
