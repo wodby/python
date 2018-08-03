@@ -5,7 +5,7 @@ services:
     image: wodby/nginx
     environment:
       NGINX_APP_SERVER_HOST: python
-      NGINX_APP_SERVER_PORT: 8000
+      NGINX_SERVER_ROOT: /usr/src/app
     depends_on:
       - python
 
@@ -21,14 +21,19 @@ services:
     image: $IMAGE
     environment:
       SSH_DISABLE_STRICT_KEY_CHECKING: 1
+      DEBUG: 1
     volumes:
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa
+      - ./main.py:/usr/src/app/main.py
+    command: sh -c "pip install gunicorn && sudo -E /etc/init.d/gunicorn"
     depends_on:
       - sshd
 
   crond:
     image: $IMAGE
     command: sudo -E crond -f -d 0
+    volumes:
+      - ./crontab:/etc/crontabs/www-data
     depends_on:
       - sshd

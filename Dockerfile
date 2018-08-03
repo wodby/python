@@ -114,7 +114,7 @@ RUN set -xe; \
             echo -n '/usr/local/bin/files_chown, ' ; \
             echo -n '/usr/local/bin/files_sync, ' ; \
             echo -n '/usr/local/bin/gen_ssh_keys, ' ; \
-            echo -n '/usr/local/bin/init_volumes, ' ; \
+            echo -n '/usr/local/bin/init_container, ' ; \
             echo -n '/etc/init.d/gunicorn, ' ; \
             echo -n '/usr/sbin/sshd, ' ; \
             echo '/usr/sbin/crond' ; \
@@ -144,14 +144,9 @@ RUN set -xe; \
     touch /etc/ssh/sshd_config; \
     chown wodby: /etc/ssh/sshd_config; \
     \
-    # Crontab
-    rm /etc/crontabs/root; \
-    touch /etc/crontabs/www-data; \
-    chown root:www-data /etc/crontabs/www-data; \
-    chmod 660 /etc/crontabs/www-data; \
-    \
     # Cleanup
     rm -rf \
+        /etc/crontabs/root \
         /tmp/* \
         /var/cache/apk/*
 

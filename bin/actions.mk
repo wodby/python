@@ -11,8 +11,8 @@ host ?= localhost
 max_try ?= 1
 wait_seconds ?= 1
 delay_seconds ?= 0
-command ?=
-service = Python
+command ?= curl -s -o /dev/null -I -w '%{http_code}' ${host}:8080 | grep -q 200
+service = Gunicorn
 
 default: check-ready
 

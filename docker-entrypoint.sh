@@ -14,10 +14,6 @@ _gotpl() {
     fi
 }
 
-init_ssh_client() {
-    _gotpl "ssh_config.tpl" "${ssh_dir}/config"
-}
-
 init_sshd() {
     _gotpl "sshd_config.tpl" "/etc/ssh/sshd_config"
 
@@ -41,16 +37,15 @@ init_git() {
 }
 
 process_templates() {
+    _gotpl "ssh_config.tpl" "${ssh_dir}/config"
     _gotpl "gunicorn.py.tpl" "/usr/local/etc/gunicorn/config.py"
 }
 
 chmod +x /etc/init.d/gunicorn
 
-sudo init_volumes
+sudo init_container
 
-init_ssh_client
 init_git
-
 process_templates
 
 if [[ "${@:1:2}" == "sudo /usr/sbin/sshd" ]]; then
@@ -61,9 +56,8 @@ exec_init_scripts
 
 if [[ $1 == "make" ]]; then
     exec "${@}" -f /usr/local/bin/actions.mk
-# Infinite loop with default command and missing requirements.txt.
-elif [[ "${@:1:3}" == "sudo -E /etc/init.d/gunicorn" && ! -f "requirements.txt" ]]; then
-    echo "File requirements.txt is missing in working dir ${PWD}"
+elif [[ "${@:1:3}" == "sudo -E /etc/init.d/gunicorn" ]] && ! command -v gunicorn; then
+    echo "Gunicorn not installed!"
 
     trap cleanup SIGINT SIGTERM
 

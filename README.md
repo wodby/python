@@ -97,6 +97,19 @@ Include all changes from `-dev` images and additionally:
 * Python compiled with `--with-pydebug` flag
 * Python binaries are not stripped from debug symbols
 
+## Crond
+
+You can run Crond with this image changing the command to `sudo -E crond -f -d 0` and mounting a crontab file to `./crontab:/etc/crontabs/www-data`. Example crontab file contents:
+
+```
+# min	hour	day	month	weekday	command
+*/1	*	*	*	*	echo "test" > /mnt/files/cron
+```
+
+## SSHD
+
+You can run SSHD with this image by changing the command to `sudo /usr/sbin/sshd -De` and mounting authorized public keys to `/home/wodby/.ssh/authorized_keys`
+
 ## Users and permissions
 
 Default container user is `wodby:wodby` (UID/GID `1000`). Gunicorn runs from `www-data:www-data` user (UID/GID `82`) by default. User `wodby` is a part of `www-data` group.
