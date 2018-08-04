@@ -8,7 +8,7 @@ env:
     - PYTHON37=3.7.0
     - PYTHON36=3.6.6
     - PYTHON35=3.5.6
-    - PYTHON34=3.4.8
+    - PYTHON34=3.4.9
     - PYTHON27=2.7.15
   matrix:
     - PYTHON_VER="${PYTHON37}" TAGS=3.7,3,latest
