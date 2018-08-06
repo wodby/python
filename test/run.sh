@@ -37,7 +37,7 @@ run_action() {
 docker-compose up -d
 
 run_action python check-ready max_try=10
-
+docker-compose logs sshd
 docker_exec python tests.sh
 
 wait_for_cron
