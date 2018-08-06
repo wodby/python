@@ -42,4 +42,4 @@ docker_exec python tests.sh
 
 wait_for_cron
 
-#docker-compose down
+docker-compose down
