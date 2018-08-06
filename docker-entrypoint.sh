@@ -15,7 +15,7 @@ _gotpl() {
 }
 
 init_sshd() {
-    _gotpl "sshd_config.tpl" "/etc/ssh/sshd_config"
+    _gotpl "sshd_config.tmpl" "/etc/ssh/sshd_config"
 
     printenv | xargs -I{} echo {} | awk ' \
         BEGIN { FS = "=" }; { \
@@ -37,8 +37,8 @@ init_git() {
 }
 
 process_templates() {
-    _gotpl "ssh_config.tpl" "${ssh_dir}/config"
-    _gotpl "gunicorn.py.tpl" "/usr/local/etc/gunicorn/config.py"
+    _gotpl "ssh_config.tmpl" "${ssh_dir}/config"
+    _gotpl "gunicorn.py.tmpl" "/usr/local/etc/gunicorn/config.py"
 }
 
 chmod +x /etc/init.d/gunicorn
