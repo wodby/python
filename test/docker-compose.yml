@@ -4,7 +4,9 @@ services:
   nginx:
     image: wodby/nginx
     environment:
-      NGINX_APP_SERVER_HOST: python
+      DEBUG: 1
+      NGINX_BACKEND_HOST: python
+      NGINX_VHOST_PRESET: http-proxy
       NGINX_SERVER_ROOT: /usr/src/app
     depends_on:
       - python
@@ -22,6 +24,7 @@ services:
     environment:
       SSH_DISABLE_STRICT_KEY_CHECKING: 1
       DEBUG: 1
+      ROWS: 80
     volumes:
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa

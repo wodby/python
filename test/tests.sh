@@ -8,7 +8,7 @@ fi
 
 python -V | grep -q "${PYTHON_VERSION}"
 
-ssh -vvv sshd cat /home/wodby/.ssh/authorized_keys | grep admin@example.com
+ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
 
 curl -s nginx | grep -q "Hello, World!"
 curl -s localhost:8080 | grep -q "Hello, World!"
