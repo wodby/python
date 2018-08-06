@@ -38,6 +38,7 @@ docker-compose up -d
 
 run_action python check-ready max_try=10
 docker-compose logs sshd
+run_action sshd sh -c "cat /home/wodby/.ssh/authorized_keys"
 sleep 5
 docker_exec python tests.sh
 
