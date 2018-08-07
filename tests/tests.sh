@@ -6,7 +6,11 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-python -V | grep -q "${PYTHON_VERSION}"
+if [[ "${PYTHON_VERSION}" == 2* ]]; then
+    python -V 2>&1 | grep -q "${PYTHON_VERSION}"
+else
+    python -V | grep -q "${PYTHON_VERSION}"
+fi
 
 ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
 
