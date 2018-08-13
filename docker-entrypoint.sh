@@ -54,7 +54,7 @@ fi
 
 exec_init_scripts
 
-if [[ $1 == "make" ]]; then
+if [[ "${1}" == "make" ]]; then
     exec "${@}" -f /usr/local/bin/actions.mk
 elif [[ "${@:1:3}" == "sudo -E /etc/init.d/gunicorn" ]] && ! command -v gunicorn; then
     echo "Gunicorn not installed!"
