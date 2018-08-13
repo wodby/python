@@ -1,6 +1,7 @@
-tests
 .travis.yml
 .gitignore
+.base-python
+tests
 README.md
 release.sh
 Makefile
