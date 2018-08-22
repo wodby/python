@@ -42,26 +42,27 @@ RUN set -xe; \
 	sed -i '/^wodby/s/!/*/' /etc/shadow; \
     \
     apk add --update --no-cache -t .python-rundeps \
-        freetype=2.8.1-r3 \
+        freetype=2.9.1-r1 \
         git \
         gmp=6.1.2-r1 \
-        icu-libs=59.1-r1 \
-        imagemagick=7.0.7.11-r1 \
+        icu-libs=60.2-r2 \
+        imagemagick=7.0.7.32-r0 \
         less \
         libbz2=1.0.6-r6 \
-        libjpeg-turbo=1.5.2-r0 \
+        libjpeg-turbo=1.5.3-r1 \
         libjpeg-turbo-utils \
-        libldap=2.4.45-r3 \
+        libldap=2.4.46-r0 \
         libmemcached-libs=1.0.18-r2 \
         libpng=1.6.34-r1 \
-        libxslt=1.1.31-r0 \
+        librdkafka=0.11.4-r1 \
+        libxslt=1.1.32-r0 \
         make \
-        mariadb-client=10.1.32-r0 \
+        mariadb-client=10.2.15-r0 \
         nano \
         openssh \
         openssh-client \
         postgresql-client=10.5-r0 \
-        rabbitmq-c=0.8.0-r3 \
+        rabbitmq-c=0.8.0-r4 \
         patch \
         rsync \
         su-exec \
