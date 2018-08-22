@@ -16,6 +16,7 @@
 * [Users and permissions](#users-and-permissions)
 * [Crond](#crond)
 * [SSHD](#sshd)
+* [Adding SSH key](#adding-ssh-key)
 * [Orchestration Actions](#orchestration-actions)
 
 ## Docker Images
@@ -111,6 +112,10 @@ You can run Crond with this image changing the command to `sudo -E crond -f -d 0
 ## SSHD
 
 You can run SSHD with this image by changing the command to `sudo /usr/sbin/sshd -De` and mounting authorized public keys to `/home/wodby/.ssh/authorized_keys`
+
+## Adding SSH key
+
+You can add a private SSH key to the container by mounting it to `/home/wodby/.ssh/id_rsa`
 
 ## Users and permissions
 
