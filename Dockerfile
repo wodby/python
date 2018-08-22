@@ -8,22 +8,7 @@ ARG WODBY_USER_ID=1000
 ARG WODBY_GROUP_ID=1000
 
 ENV PYTHON_DEV="${PYTHON_DEV}" \
-    SSHD_PERMIT_USER_ENV="yes" \
-    \
-    FREETYPE_VER="2.9.1-r1" \
-    GMP_VER="6.1.2-r1" \
-    ICU_LIBS_VER="60.2-r2" \
-    IMAGEMAGICK_VER="7.0.7.32-r0" \
-    LIBBZ2_VER="1.0.6-r6" \
-    LIBJPEG_TURBO_VER="1.5.3-r1" \
-    LIBLDAP_VER="2.4.46-r0" \
-    LIBMEMCACHED_LIBS_VER="1.0.18-r2" \
-    LIBPNG_VER="1.6.34-r1" \
-    LIBXSLT_VER="1.1.32-r0" \
-    MARIADB_CLIENT_VER="10.2.15-r0" \
-    POSTGRESQL_CLIENT_VER="10.5-r0" \
-    RABBITMQ_C_VER="0.8.0-r4" \
-    YAML_VER="0.1.7-r0"
+    SSHD_PERMIT_USER_ENV="yes"
 
 ENV APP_ROOT="/usr/src/app" \
     CONF_DIR="/usr/src/app" \
@@ -57,33 +42,33 @@ RUN set -xe; \
 	sed -i '/^wodby/s/!/*/' /etc/shadow; \
     \
     apk add --update --no-cache -t .python-rundeps \
-        "freetype=${FREETYPE_VER}" \
+        freetype=2.8.1-r3 \
         git \
-        "gmp=${GMP_VER}" \
-        "icu-libs=${ICU_LIBS_VER}" \
-        "imagemagick=${IMAGEMAGICK_VER}" \
+        gmp=6.1.2-r1 \
+        icu-libs=59.1-r1 \
+        imagemagick=7.0.7.11-r1 \
         less \
-        "libbz2=${LIBBZ2_VER}" \
-        "libjpeg-turbo=${LIBJPEG_TURBO_VER}" \
-        "libjpeg-turbo-utils=${LIBJPEG_TURBO_VER}" \
-        "libldap=${LIBLDAP_VER}" \
-        "libmemcached-libs=${LIBMEMCACHED_LIBS_VER}" \
-        "libpng=${LIBPNG_VER}" \
-        "libxslt=${LIBXSLT_VER}" \
+        libbz2=1.0.6-r6 \
+        libjpeg-turbo=1.5.2-r0 \
+        libjpeg-turbo-utils \
+        libldap=2.4.45-r3 \
+        libmemcached-libs=1.0.18-r2 \
+        libpng=1.6.34-r1 \
+        libxslt=1.1.31-r0 \
         make \
-        "mariadb-client=${MARIADB_CLIENT_VER}" \
+        mariadb-client=10.1.32-r0 \
         nano \
         openssh \
         openssh-client \
-        "postgresql-client=${POSTGRESQL_CLIENT_VER}" \
-        "rabbitmq-c=${RABBITMQ_C_VER}" \
+        postgresql-client=10.5-r0 \
+        rabbitmq-c=0.8.0-r3 \
         patch \
         rsync \
         su-exec \
         sudo \
         tig \
         tmux \
-        "yaml=${YAML_VER}"; \
+        yaml=0.1.7-r0; \
     \
     # Install redis-cli.
     apk add --update --no-cache redis; \
