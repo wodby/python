@@ -129,7 +129,7 @@ RUN set -xe; \
     \
     # SSHD
     touch /etc/ssh/sshd_config; \
-    chown wodby: /etc/ssh/sshd_config; \
+    chown wodby: /etc/ssh/sshd_config /home/wodby/.*; \
     \
     # Cleanup
     rm -rf \
