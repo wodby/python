@@ -8,11 +8,13 @@
 ## Table of Contents
 
 * [Docker Images](#docker-images)
+    * [`-dev`](#-dev)
+    * [`-dev-macos`](#-dev-macos)
+    * [`-debug`](#-debug)
 * [Environment Variables](#environment-variables)
-* [Build arguments](#build-arguments)    
-* [`-dev` images](#-dev-images)
-* [`-dev-macos` images](#-dev-macos-images)
-* [`-debug` images](#-debug-images)
+* [Build arguments](#build-arguments)
+* [Libraries](#libraries)
+* [Changelog](#changelog)    
 * [Users and permissions](#users-and-permissions)
 * [Crond](#crond)
 * [SSHD](#sshd)
@@ -28,25 +30,41 @@ About images:
 * All images are based on Alpine Linux 3.8
 * [Travis CI builds](https://travis-ci.com/wodby/python) 
 * [Docker Hub](https://hub.docker.com/r/wodby/python) 
-* [`-dev`](#-dev-images) and [`-debug`](#-debug-images) images have a few differences
 
 Supported tags and respective `Dockerfile` links:
 
-* `3.7`, `3`, `latest` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.6` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.5` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.4` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `2.7`, `2` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.7-dev`, `3-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.6-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.5-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.4-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `2.7-dev`, `2-dev` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.7-dev-macos`, `3-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.6-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.5-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `3.4-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
-* `2.7-dev-macos`, `2-dev-macos` [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
+* `3.7`, `3`, `latest` [_(Dockerfile)_]
+* `3.6` [_(Dockerfile)_]
+* `3.5` [_(Dockerfile)_]
+* `3.4` [_(Dockerfile)_]
+* `2.7`, `2` [_(Dockerfile)_]
+* `3.7-dev`, `3-dev` [_(Dockerfile)_]
+* `3.6-dev` [_(Dockerfile)_]
+* `3.5-dev` [_(Dockerfile)_]
+* `3.4-dev` [_(Dockerfile)_]
+* `2.7-dev`, `2-dev` [_(Dockerfile)_]
+* `3.7-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+* `3.6-dev-macos` [_(Dockerfile)_]
+* `3.5-dev-macos` [_(Dockerfile)_]
+* `3.4-dev-macos` [_(Dockerfile)_]
+* `2.7-dev-macos`, `2-dev-macos` [_(Dockerfile)_]
+
+[_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
+
+### `-dev`
+
+Images with `-dev` tag have `sudo` allowed for all commands for `wodby` user.
+
+### `-dev-macos`
+
+Same as `-dev` but the default user/group `wodby` has uid/gid `501`/`20`  to match the macOS default user/group ids.
+
+### `-debug`
+
+Include all changes from `-dev` images and additionally:
+
+* Python compiled with `--with-pydebug` flag
+* Python binaries are not stripped from debug symbols
 
 ## Environment Variables
 
@@ -85,20 +103,13 @@ Supported tags and respective `Dockerfile` links:
 
 Change `WODBY_USER_ID` and `WODBY_GROUP_ID` mainly for local dev version of images, if it matches with existing system user/group ids the latter will be deleted. 
 
-## `-dev` Images
+## Libraries
 
-Images with `-dev` tag have `sudo` allowed for all commands for `wodby` user
+All essential linux libraries are freezed and updates will be reflected in [changelog](#changelog). 
 
-## `-dev-macos` Images
+## Changelog
 
-Same as `-dev` but the default user/group `wodby` has uid/gid `501`/`20`  to match the macOS default user/group ids.
-
-## `-debug` Images
-
-Include all changes from `-dev` images and additionally:
-
-* Python compiled with `--with-pydebug` flag
-* Python binaries are not stripped from debug symbols
+Changes per stability tag reflected in git tags description under [releases](https://github.com/wodby/python/releases). 
 
 ## Crond
 

@@ -20,10 +20,7 @@ ENV APP_ROOT="/usr/src/app" \
     GIT_USER_NAME="wodby"
 
 ENV GUNICORN_APP="main:app" \
-    PIP_USER=1 \
-    PYTHONUSERBASE="${APP_ROOT}/.local"
-
-ENV PATH="${PATH}:${PYTHONUSERBASE}/bin"
+    PIP_USER=1
 
 RUN set -xe; \
     \
@@ -49,7 +46,7 @@ RUN set -xe; \
         imagemagick=7.0.7.32-r0 \
         less \
         libbz2=1.0.6-r6 \
-        libjpeg-turbo=1.5.3-r1 \
+        libjpeg-turbo=1.5.3-r3 \
         libjpeg-turbo-utils \
         libldap=2.4.46-r0 \
         libmemcached-libs=1.0.18-r2 \
@@ -73,19 +70,26 @@ RUN set -xe; \
     \
     # Install redis-cli.
     apk add --update --no-cache redis; \
-    mkdir -p /tmp/pkgs-bins; \
     mv /usr/bin/redis-cli /tmp/; \
     apk del --purge redis; \
     deluser redis; \
     mv /tmp/redis-cli /usr/bin; \
     \
+    if [[ -n "${PYTHON_DEV}" ]]; then \
+        apk add --update --no-cache -t .python-build-deps \
+            build-base \
+            imagemagick-dev \
+            libffi-dev \
+            linux-headers \
+            mariadb-dev \
+            postgresql-dev; \
+    fi; \
+    \
     { \
         echo 'export PS1="\u@${WODBY_APP_NAME:-python}.${WODBY_ENVIRONMENT_NAME:-container}:\w $ "'; \
-        # Make sure PATH is the same for ssh sessions.
         echo "export PATH=${PATH}"; \
     } | tee /home/wodby/.shrc; \
     \
-    # Make sure bash uses the same settings as ash.
     cp /home/wodby/.shrc /home/wodby/.bashrc; \
     cp /home/wodby/.shrc /home/wodby/.bash_profile; \
     \
@@ -108,10 +112,8 @@ RUN set -xe; \
         fi; \
     } | tee /etc/sudoers.d/wodby; \
     \
-    # Configure ldap
     echo "TLS_CACERTDIR /etc/ssl/certs/" >> /etc/openldap/ldap.conf; \
     \
-    # Create required directories and fix permissions
     install -o wodby -g wodby -d \
         "${APP_ROOT}" \
         "${CONF_DIR}" \
@@ -127,11 +129,9 @@ RUN set -xe; \
     chmod -R 775 "${FILES_DIR}"; \
     su-exec wodby touch /usr/local/etc/gunicorn/config.py; \
     \
-    # SSHD
     touch /etc/ssh/sshd_config; \
     chown wodby: /etc/ssh/sshd_config /home/wodby/.*; \
     \
-    # Cleanup
     rm -rf \
         /etc/crontabs/root \
         /tmp/* \
@@ -146,6 +146,9 @@ COPY --chown=wodby:wodby gunicorn.init.d /etc/init.d/gunicorn
 COPY templates /etc/gotpl/
 COPY docker-entrypoint.sh /
 COPY bin /usr/local/bin/
+
+ONBUILD COPY requirements.txt ./
+ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["sudo", "-E", "/etc/init.d/gunicorn"]
