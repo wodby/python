@@ -20,7 +20,8 @@ ENV APP_ROOT="/usr/src/app" \
     GIT_USER_NAME="wodby"
 
 ENV GUNICORN_APP="main:app" \
-    PIP_USER=1
+    PIP_USER=1 \
+    PATH="/home/wodby/.local/bin:${PATH}"
 
 RUN set -xe; \
     \
