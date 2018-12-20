@@ -4,7 +4,7 @@ services:
   nginx:
     image: wodby/nginx
     environment:
-#      DEBUG: 1
+      DEBUG: 1
       NGINX_VHOST_PRESET: django
       NGINX_BACKEND_HOST: python
     volumes:
@@ -31,7 +31,8 @@ services:
       - codebase:/usr/src/app
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa
-    command: bash -c "pip install Django gunicorn && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
+    # Pre-create .local to avoid issues when Nginx change ownership of the bind mount when we use custom WODBY_USER_ID.
+    command: bash -c "mkdir -p .local && pip install gunicorn Django && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
     depends_on:
       - sshd
 
