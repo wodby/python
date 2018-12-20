@@ -68,31 +68,29 @@ Include all changes from `-dev` images and additionally:
 
 ## Environment Variables
 
-| Variable                          | Default value       |
-| --------------------------------- | ------------------- |
-| `GIT_USER_EMAIL`                  | `wodby@example.com` |
-| `GIT_USER_NAME`                   | `wodby`             |
-| `GUNICORN_APP`                    | `main:app`          |
-| `GUNICORN_BACKLOG`                | `2048`              |
-| `GUNICORN_GROUP`                  | `www-data`          |
-| `GUNICORN_KEEPALIVE`              | `2`                 |
-| `GUNICORN_LOGLEVEL`               | `info`              |
-| `GUNICORN_PROC_NAME`              | `Gunicorn`          |
-| `GUNICORN_PYTHONPATH`             |                     |
-| `GUNICORN_SPEW`                   | `False`             |
-| `GUNICORN_TIMEOUT`                | `30`                |
-| `GUNICORN_USER`                   | `www-data`          |
-| `GUNICORN_WORKER_CLASS`           | `sync`              |
-| `GUNICORN_WORKER_CONNECTIONS`     | `1000`              |
-| `GUNICORN_WORKERS`                | `4`                 |
-| `SSH_DISABLE_STRICT_KEY_CHECKING` |                     |
-| `SSH_PRIVATE_KEY`                 |                     |
-| `SSHD_GATEWAY_PORTS`              | `no`                |
-| `SSHD_HOST_KEYS_DIR`              | `/etc/ssh`          |
-| `SSHD_LOG_LEVEL`                  | `INFO`              |
-| `SSHD_PASSWORD_AUTHENTICATION`    | `no`                |
-| `SSHD_PERMIT_USER_ENV`            | `no`                |
-| `SSHD_USE_DNS`                    | `yes`               |
+| Variable                          | Default value            |
+| --------------------------------- | -------------------      |
+| `GIT_USER_EMAIL`                  | `wodby@example.com`      |
+| `GIT_USER_NAME`                   | `wodby`                  |
+| `GUNICORN_APP`                    | `myapp.wsgi:application` |
+| `GUNICORN_BACKLOG`                | `2048`                   |
+| `GUNICORN_KEEPALIVE`              | `2`                      |
+| `GUNICORN_LOGLEVEL`               | `info`                   |
+| `GUNICORN_PROC_NAME`              | `Gunicorn`               |
+| `GUNICORN_PYTHONPATH`             |                          |
+| `GUNICORN_SPEW`                   | `False`                  |
+| `GUNICORN_TIMEOUT`                | `30`                     |
+| `GUNICORN_WORKER_CLASS`           | `sync`                   |
+| `GUNICORN_WORKER_CONNECTIONS`     | `1000`                   |
+| `GUNICORN_WORKERS`                | `4`                      |
+| `SSH_DISABLE_STRICT_KEY_CHECKING` |                          |
+| `SSH_PRIVATE_KEY`                 |                          |
+| `SSHD_GATEWAY_PORTS`              | `no`                     |
+| `SSHD_HOST_KEYS_DIR`              | `/etc/ssh`               |
+| `SSHD_LOG_LEVEL`                  | `INFO`                   |
+| `SSHD_PASSWORD_AUTHENTICATION`    | `no`                     |
+| `SSHD_PERMIT_USER_ENV`            | `no`                     |
+| `SSHD_USE_DNS`                    | `yes`                    |
 
 ## Build arguments
 

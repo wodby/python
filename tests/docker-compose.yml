@@ -32,7 +32,7 @@ services:
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa
     # Workaround to Nginx fixing permissions to uid 1000 when we run -dev-macos variants.
-    command: bash -c "sleep 5 && sudo init_container && pip install gunicorn Django && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
+    command: bash -c "sleep 5 && sudo init_container && pip install gunicorn Django && django-admin startproject mysite . && /etc/init.d/gunicorn"
     depends_on:
       - sshd
 

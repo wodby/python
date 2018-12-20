@@ -19,7 +19,7 @@ ENV APP_ROOT="/usr/src/app" \
     GIT_USER_EMAIL="wodby@example.com" \
     GIT_USER_NAME="wodby"
 
-ENV GUNICORN_APP="main:app" \
+ENV GUNICORN_APP="myapp.wsgi:application" \
     PIP_USER=1 \
     PYTHONUSERBASE="${APP_ROOT}/.local" \
     PYTHONUNBUFFERED=1 \
@@ -112,7 +112,6 @@ RUN set -xe; \
             echo -n '/usr/local/bin/files_sync, ' ; \
             echo -n '/usr/local/bin/gen_ssh_keys, ' ; \
             echo -n '/usr/local/bin/init_container, ' ; \
-            echo -n '/etc/init.d/gunicorn, ' ; \
             echo -n '/usr/sbin/sshd, ' ; \
             echo '/usr/sbin/crond' ; \
         fi; \
@@ -157,4 +156,4 @@ ONBUILD COPY requirements.txt ./
 ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["sudo", "-E", "/etc/init.d/gunicorn"]
+CMD ["/etc/init.d/gunicorn"]
