@@ -81,11 +81,14 @@ RUN set -xe; \
     if [[ -n "${PYTHON_DEV}" ]]; then \
         apk add --update --no-cache -t .python-build-deps \
             build-base \
+            gcc \
             imagemagick-dev \
             libffi-dev \
             linux-headers \
             mariadb-dev \
-            postgresql-dev; \
+            musl-dev \
+            postgresql-dev \
+            "python${PYTHON_VER:0:1}-dev"; \
     fi; \
     \
     { \
