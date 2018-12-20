@@ -15,9 +15,10 @@ fi
 python -c 'import django; print(django.get_version())'
 
 ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
-echo "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')" >> mysite/settings.py
+
+echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> mysite/settings.py
 python manage.py collectstatic --no-input
 
 curl -s localhost:8080 | grep -q "Get started with Django"
 curl -sH "Host: localhost" nginx | grep -q "Get started with Django"
-curl -sIH "Host: localhost" nginx/static/admin/css/base.css | grep "200 OK"
+curl -sIH "Host: localhost" nginx/static/admin/css/base.css | grep -q "200 OK"
