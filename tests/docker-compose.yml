@@ -32,7 +32,7 @@ services:
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa
     # Pre-create .local to avoid issues when Nginx change ownership of the bind mount when we use custom WODBY_USER_ID.
-    command: bash -c "mkdir -p .local && pip install gunicorn Django && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
+    command: bash -c "mkdir -p .local && pip install --no-cache gunicorn Django && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
     depends_on:
       - sshd
 
