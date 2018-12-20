@@ -6,9 +6,8 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
+# The following python env vars considered as bad variables: $PYTHONHOME, $PYTHONPATH, $PYTHONINSPECT, $PYTHONUSERBASE
+# So we have to set it again.
 export PYTHONUSERBASE="${APP_ROOT}/.local"
 
-minor="${PYTHON_VERSION%.*}"
-export PYTHONPATH="/usr/local/lib/python${minor}:${PYTHONUSERBASE}/lib/python${minor}/site-packages"
-
-gunicorn -c /usr/local/etc/gunicorn/config.py "${GUNICORN_APP}"
+gunicorn -c /usr/local/etc/gunicorn/config.py --pythonpath "${GUNICORN_PYTHONPATH:-}" "${GUNICORN_APP}"

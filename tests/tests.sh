@@ -12,7 +12,12 @@ else
     python -V | grep -q "${PYTHON_VERSION}"
 fi
 
-ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
+python -c 'import django; print(django.get_version())'
 
-curl -s nginx | grep -q "Hello, World!"
-curl -s localhost:8080 | grep -q "Hello, World!"
+ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
+echo "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')" >> mysite/settings.py
+python manage.py collectstatic --no-input
+
+curl -s localhost:8080 | grep -q "Get started with Django"
+curl -sH "Host: localhost" nginx | grep -q "Get started with Django"
+curl -sIH "Host: localhost" nginx/static/admin/css/base.css | grep "200 OK"

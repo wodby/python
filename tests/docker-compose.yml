@@ -4,10 +4,11 @@ services:
   nginx:
     image: wodby/nginx
     environment:
-      DEBUG: 1
+#      DEBUG: 1
+      NGINX_VHOST_PRESET: django
       NGINX_BACKEND_HOST: python
-      NGINX_VHOST_PRESET: http-proxy
-      NGINX_SERVER_ROOT: /usr/src/app
+    volumes:
+      - codebase:/var/www/html
     depends_on:
       - python
 
@@ -23,13 +24,14 @@ services:
     image: $IMAGE
     environment:
       SSH_DISABLE_STRICT_KEY_CHECKING: 1
+      GUNICORN_APP: mysite.wsgi:application
       DEBUG: 1
       ROWS: 80
     volumes:
+      - codebase:/usr/src/app
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa
-      - ./main.py:/usr/src/app/main.py
-    command: sh -c "pip install gunicorn && sudo -E /etc/init.d/gunicorn"
+    command: bash -c "pip install Django gunicorn && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
     depends_on:
       - sshd
 
@@ -40,3 +42,6 @@ services:
       - ./crontab:/etc/crontabs/www-data
     depends_on:
       - sshd
+
+volumes:
+  codebase:

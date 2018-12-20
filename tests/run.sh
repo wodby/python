@@ -36,7 +36,7 @@ run_action() {
 
 docker-compose up -d
 
-run_action python check-ready max_try=10
+run_action python check-ready max_try=10 wait_seconds=5 delay_seconds=30
 
 docker_exec python tests.sh
 

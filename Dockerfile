@@ -21,7 +21,9 @@ ENV APP_ROOT="/usr/src/app" \
 
 ENV GUNICORN_APP="main:app" \
     PIP_USER=1 \
-    PATH="/home/wodby/.local/bin:${PATH}"
+    PYTHONUSERBASE="${APP_ROOT}/.local" \
+    PYTHONUNBUFFERED=1 \
+    PATH="${APP_ROOT}/.local/bin:${PATH}"
 
 RUN set -xe; \
     \
