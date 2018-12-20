@@ -31,8 +31,8 @@ services:
       - codebase:/usr/src/app
       - ./tests.sh:/usr/local/bin/tests.sh
       - ./id_rsa:/home/wodby/.ssh/id_rsa
-    # Pre-create .local to avoid issues when Nginx change ownership of the bind mount when we use custom WODBY_USER_ID.
-    command: bash -c "mkdir -p .local && pip install --no-cache gunicorn Django && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
+    # Workaround to Nginx fixing permissions to uid 1000 when we run -dev-macos variants.
+    command: bash -c "sleep 5 && sudo init_container && pip install gunicorn Django && django-admin startproject mysite . && sudo -E /etc/init.d/gunicorn"
     depends_on:
       - sshd
 
