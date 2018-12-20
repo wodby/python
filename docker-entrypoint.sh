@@ -41,12 +41,12 @@ process_templates() {
     _gotpl "gunicorn.py.tmpl" "/usr/local/etc/gunicorn/config.py"
 }
 
-chmod +x /etc/init.d/gunicorn
-
 sudo init_container
 
 init_git
 process_templates
+
+chmod +x /etc/init.d/gunicorn
 
 if [[ "${@:1:2}" == "sudo /usr/sbin/sshd" ]]; then
     init_sshd
@@ -56,15 +56,6 @@ exec_init_scripts
 
 if [[ "${1}" == "make" ]]; then
     exec "${@}" -f /usr/local/bin/actions.mk
-elif [[ "${@:1:3}" == "sudo -E /etc/init.d/gunicorn" ]] && ! command -v gunicorn; then
-    echo "Gunicorn not installed!"
-
-    trap cleanup SIGINT SIGTERM
-
-    while [ 1 ]; do
-        sleep 60 &
-        wait $!
-    done
 else
     exec "${@}"
 fi

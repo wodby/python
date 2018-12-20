@@ -8,8 +8,10 @@ fi
 
 if [[ "${PYTHON_VERSION}" == 2* ]]; then
     python -V 2>&1 | grep -q "${PYTHON_VERSION}"
+    django_msg="It worked!"
 else
     python -V | grep -q "${PYTHON_VERSION}"
+    django_msg="Get started with Django"
 fi
 
 python -c 'import django; print(django.get_version())'
@@ -19,6 +21,6 @@ ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
 echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> mysite/settings.py
 python manage.py collectstatic --no-input
 
-curl -s localhost:8080 | grep -q "Get started with Django"
-curl -sH "Host: localhost" nginx | grep -q "Get started with Django"
+curl -s localhost:8080 | grep -q "${django_msg}"
+curl -sH "Host: localhost" nginx | grep -q "${django_msg}"
 curl -sIH "Host: localhost" nginx/static/admin/css/base.css | grep -q "200 OK"
