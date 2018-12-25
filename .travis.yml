@@ -6,7 +6,7 @@ services:
 env:
   global:
     - PYTHON37=3.7.2
-    - PYTHON36=3.6.7
+    - PYTHON36=3.6.8
     - PYTHON35=3.5.6
     - PYTHON34=3.4.9
     - PYTHON27=2.7.15
