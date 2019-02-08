@@ -41,7 +41,7 @@ RUN set -xe; \
 	adduser wodby www-data; \
 	sed -i '/^wodby/s/!/*/' /etc/shadow; \
     \
-    apk add --update --no-cache -t .python-rundeps \
+    apk add --update --no-cache -t .wodby-python-run-deps \
         freetype=2.9.1-r2 \
         git \
         gmp=6.1.2-r1 \
@@ -79,7 +79,7 @@ RUN set -xe; \
     mv /tmp/redis-cli /usr/bin; \
     \
     if [[ -n "${PYTHON_DEV}" ]]; then \
-        apk add --update --no-cache -t .python-build-deps \
+        apk add --update --no-cache -t .wodby-python-build-deps \
             build-base \
             gcc \
             imagemagick-dev \
