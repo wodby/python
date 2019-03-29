@@ -102,6 +102,7 @@ RUN set -xe; \
     gotpl_url="https://github.com/wodby/gotpl/releases/download/0.1.5/gotpl-alpine-linux-amd64-0.1.5.tar.gz"; \
     wget -qO- "${gotpl_url}" | tar xz -C /usr/local/bin; \
     git clone https://github.com/wodby/alpine /tmp/alpine; \
+    cd /tmp/alpine; \
     latest=$(git describe --abbrev=0 --tags); \
     git checkout "${latest}"; \
     mv /tmp/alpine/bin/* /usr/local/bin; \
