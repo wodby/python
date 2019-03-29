@@ -29,6 +29,7 @@
 About images:
 
 * All images are based on Alpine Linux
+* Base image: [python](https://github.com/docker-library/python)
 * [Travis CI builds](https://travis-ci.com/wodby/python) 
 * [Docker Hub](https://hub.docker.com/r/wodby/python) 
 

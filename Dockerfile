@@ -98,7 +98,7 @@ RUN set -xe; \
             "python${PYTHON_VER:0:1}-dev"; \
     fi; \
     \
-    # Downloan helper scripts.
+    # Download helper scripts.
     gotpl_url="https://github.com/wodby/gotpl/releases/download/0.1.5/gotpl-alpine-linux-amd64-0.1.5.tar.gz"; \
     wget -qO- "${gotpl_url}" | tar xz -C /usr/local/bin; \
     git clone https://github.com/wodby/alpine /tmp/alpine; \
