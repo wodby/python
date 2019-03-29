@@ -9,8 +9,6 @@ NAME = python-$(PYTHON_VER_MINOR)
 WODBY_USER_ID ?= 1000
 WODBY_GROUP_ID ?= 1000
 
-BASE_IMAGE_TAG = $(PYTHON_VER)
-
 ifeq ($(TAG),)
     ifneq ($(PYTHON_DEBUG),)
         TAG ?= $(PYTHON_VER_MINOR)-debug
@@ -25,12 +23,6 @@ ifneq ($(PYTHON_DEV),)
     NAME := $(NAME)-dev
 endif
 
-ifneq ($(PYTHON_DEBUG),)
-    NAME := $(NAME)-debug
-    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-debug
-    PYTHON_DEV := 1
-endif
-
 ifneq ($(STABILITY_TAG),)
     ifneq ($(TAG),latest)
         override TAG := $(TAG)-$(STABILITY_TAG)
@@ -43,7 +35,7 @@ default: build
 
 build:
 	docker build -t $(REPO):$(TAG) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
 		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \

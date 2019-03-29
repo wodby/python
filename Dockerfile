@@ -1,6 +1,6 @@
-ARG BASE_IMAGE_TAG
+ARG PYTHON_VER
 
-FROM wodby/base-python:${BASE_IMAGE_TAG}
+FROM python:${PYTHON_VER}-alpine
 
 ARG PYTHON_DEV
 
@@ -42,15 +42,19 @@ RUN set -xe; \
 	sed -i '/^wodby/s/!/*/' /etc/shadow; \
     \
     apk add --update --no-cache -t .wodby-python-run-deps \
+        bash \
+        ca-certificates \
+        curl \
         freetype=2.9.1-r2 \
         git \
         gmp=6.1.2-r1 \
+        gzip \
         icu-libs=62.1-r0 \
         imagemagick=7.0.8.23-r0	 \
         less \
         libbz2=1.0.6-r6 \
-        libjpeg-turbo=1.5.3-r4 \
         libjpeg-turbo-utils \
+        libjpeg-turbo=1.5.3-r4 \
         libldap=2.4.47-r2 \
         libmemcached-libs=1.0.18-r3 \
         libpng=1.6.35-r0 \
@@ -61,14 +65,17 @@ RUN set -xe; \
         nano \
         openssh \
         openssh-client \
+        patch \
         postgresql-client=11.1-r0 \
         rabbitmq-c=0.8.0-r5 \
-        patch \
         rsync \
         su-exec \
         sudo \
+        tar \
         tig \
         tmux \
+        unzip \
+        wget \
         yaml=0.2.1-r0; \
     \
     # Install redis-cli.
@@ -90,6 +97,14 @@ RUN set -xe; \
             postgresql-dev \
             "python${PYTHON_VER:0:1}-dev"; \
     fi; \
+    \
+    # Downloan helper scripts.
+    gotpl_url="https://github.com/wodby/gotpl/releases/download/0.1.5/gotpl-alpine-linux-amd64-0.1.5.tar.gz"; \
+    wget -qO- "${gotpl_url}" | tar xz -C /usr/local/bin; \
+    git clone https://github.com/wodby/alpine /tmp/alpine; \
+    latest=$(git describe --abbrev=0 --tags); \
+    git checkout "${latest}"; \
+    mv /tmp/alpine/bin/* /usr/local/bin; \
     \
     { \
         echo 'export PS1="\u@${WODBY_APP_NAME:-python}.${WODBY_ENVIRONMENT_NAME:-container}:\w $ "'; \

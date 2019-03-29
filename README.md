@@ -28,7 +28,7 @@
 
 About images:
 
-* All images are based on Alpine Linux 3.8
+* All images are based on Alpine Linux
 * [Travis CI builds](https://travis-ci.com/wodby/python) 
 * [Docker Hub](https://hub.docker.com/r/wodby/python) 
 
@@ -37,17 +37,14 @@ Supported tags and respective `Dockerfile` links:
 * `3.7`, `3`, `latest` [_(Dockerfile)_]
 * `3.6` [_(Dockerfile)_]
 * `3.5` [_(Dockerfile)_]
-* `3.4` [_(Dockerfile)_]
 * `2.7`, `2` [_(Dockerfile)_]
 * `3.7-dev`, `3-dev` [_(Dockerfile)_]
 * `3.6-dev` [_(Dockerfile)_]
 * `3.5-dev` [_(Dockerfile)_]
-* `3.4-dev` [_(Dockerfile)_]
 * `2.7-dev`, `2-dev` [_(Dockerfile)_]
 * `3.7-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
 * `3.6-dev-macos` [_(Dockerfile)_]
 * `3.5-dev-macos` [_(Dockerfile)_]
-* `3.4-dev-macos` [_(Dockerfile)_]
 * `2.7-dev-macos`, `2-dev-macos` [_(Dockerfile)_]
 
 [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
