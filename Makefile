@@ -3,6 +3,8 @@
 PYTHON_VER ?= 3.7.3
 PYTHON_VER_MINOR := $(shell v='$(PYTHON_VER)'; echo "$${v%.*}")
 
+BASE_IMAGE_TAG=$(PYTHON_VER)-alpine
+
 REPO = wodby/python
 NAME = python-$(PYTHON_VER_MINOR)
 
@@ -35,6 +37,7 @@ default: build
 
 build:
 	docker build -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
