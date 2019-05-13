@@ -58,7 +58,7 @@ RUN set -xe; \
         libjpeg-turbo=1.5.3-r4 \
         libldap=2.4.47-r2 \
         libmemcached-libs=1.0.18-r3 \
-        libpng=1.6.35-r0 \
+        libpng=1.6.37-r0 \
         librdkafka=0.11.6-r1 \
         libxslt=1.1.33-r1 \
         make \
