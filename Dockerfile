@@ -46,20 +46,20 @@ RUN set -xe; \
         bash \
         ca-certificates \
         curl \
-        freetype=2.9.1-r2 \
+        freetype=2.10.0-r0 \
         git \
         gmp=6.1.2-r1 \
         gzip \
-        icu-libs=62.1-r0 \
-        imagemagick=7.0.8.44-r0	 \
+        icu-libs=64.2-r0 \
+        imagemagick=7.0.8.49-r1 \
         less \
         libbz2=1.0.6-r6 \
         libjpeg-turbo-utils \
-        libjpeg-turbo=1.5.3-r4 \
+        libjpeg-turbo=2.0.2-r0 \
         libldap=2.4.47-r2 \
         libmemcached-libs=1.0.18-r3 \
-        libpng=1.6.37-r0 \
-        librdkafka=0.11.6-r1 \
+        libpng=1.6.37-r1 \
+        librdkafka=1.0.1-r1 \
         libxslt=1.1.33-r1 \
         make \
         mariadb-client \
@@ -77,7 +77,7 @@ RUN set -xe; \
         tmux \
         unzip \
         wget \
-        yaml=0.2.1-r0; \
+        yaml=0.2.2-r1; \
     \
     # Install redis-cli.
     apk add --update --no-cache redis; \
