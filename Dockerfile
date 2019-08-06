@@ -22,9 +22,8 @@ ENV APP_ROOT="/usr/src/app" \
 
 ENV GUNICORN_APP="myapp.wsgi:application" \
     PIP_USER=1 \
-    PYTHONUSERBASE="${APP_ROOT}/.local" \
     PYTHONUNBUFFERED=1 \
-    PATH="${APP_ROOT}/.local/bin:${PATH}"
+    PATH="/home/wodby/.local/bin:${PATH}"
 
 RUN set -xe; \
     \
