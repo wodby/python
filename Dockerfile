@@ -59,7 +59,7 @@ RUN set -xe; \
         libmemcached-libs=1.0.18-r3 \
         libpng=1.6.37-r1 \
         librdkafka=1.0.1-r1 \
-        libxslt=1.1.33-r1 \
+        libxslt=1.1.33-r2 \
         make \
         mariadb-client \
         nano \
