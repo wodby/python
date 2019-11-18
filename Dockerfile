@@ -94,8 +94,7 @@ RUN set -xe; \
             linux-headers \
             mariadb-dev \
             musl-dev \
-            postgresql-dev \
-            "python${PYTHON_VER:0:1}-dev"; \
+            postgresql-dev; \
     fi; \
     \
     # Download helper scripts.

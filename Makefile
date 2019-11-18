@@ -45,7 +45,11 @@ build:
 		./
 
 test:
+ifneq ($(PYTHON_DEV),)
 	cd ./tests && IMAGE=$(REPO):$(TAG) ./run.sh
+else
+	@echo "We run tests only for DEV images."
+endif
 
 push:
 	docker push $(REPO):$(TAG)
