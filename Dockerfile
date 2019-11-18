@@ -54,7 +54,7 @@ RUN set -xe; \
         less \
         libbz2=1.0.6-r7 \
         libjpeg-turbo-utils \
-        libjpeg-turbo=2.0.2-r0 \
+        libjpeg-turbo=2.0.3-r0 \
         libldap=2.4.48-r0 \
         libmemcached-libs=1.0.18-r3 \
         libpng=1.6.37-r1 \
