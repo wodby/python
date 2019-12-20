@@ -6,7 +6,7 @@ services:
 env:
   global:
     - PYTHON37=3.7.6
-    - PYTHON36=3.6.9
+    - PYTHON36=3.6.10
     - PYTHON35=3.5.9
     - PYTHON27=2.7.17
   matrix:
