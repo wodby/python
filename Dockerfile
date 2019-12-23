@@ -50,7 +50,7 @@ RUN set -xe; \
         gmp=6.1.2-r1 \
         gzip \
         icu-libs=64.2-r0 \
-        imagemagick=7.0.8.58-r0 \
+        imagemagick=7.0.8.68-r0 \
         less \
         libbz2=1.0.6-r7 \
         libjpeg-turbo-utils \
