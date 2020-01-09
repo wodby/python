@@ -45,21 +45,21 @@ RUN set -xe; \
         bash \
         ca-certificates \
         curl \
-        freetype=2.10.0-r0 \
+        freetype=2.10.1-r0 \
         git \
         gmp=6.1.2-r1 \
         gzip \
         icu-libs=64.2-r0 \
-        imagemagick=7.0.8.68-r0 \
+        imagemagick=7.0.9.7-r0 \
         less \
-        libbz2=1.0.6-r7 \
+        libbz2=1.0.8-r1 \
         libjpeg-turbo-utils \
-        libjpeg-turbo=2.0.3-r0 \
-        libldap=2.4.48-r0 \
-        libmemcached-libs=1.0.18-r3 \
+        libjpeg-turbo=2.0.4-r0 \
+        libldap=2.4.48-r1 \
+        libmemcached-libs=1.0.18-r4 \
         libpng=1.6.37-r1 \
-        librdkafka=1.0.1-r1 \
-        libxslt=1.1.33-r2 \
+        librdkafka=1.2.2-r0 \
+        libxslt=1.1.34-r0 \
         make \
         mariadb-client \
         nano \
@@ -67,7 +67,7 @@ RUN set -xe; \
         openssh-client \
         patch \
         postgresql-client \
-        rabbitmq-c=0.8.0-r5 \
+        rabbitmq-c=0.10.0-r0 \
         rsync \
         su-exec \
         sudo \
