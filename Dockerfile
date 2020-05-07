@@ -55,7 +55,7 @@ RUN set -xe; \
         libbz2=1.0.8-r1 \
         libjpeg-turbo-utils \
         libjpeg-turbo=2.0.4-r0 \
-        libldap=2.4.48-r1 \
+        libldap=2.4.48-r2 \
         libmemcached-libs=1.0.18-r4 \
         libpng=1.6.37-r1 \
         librdkafka=1.2.2-r0 \
