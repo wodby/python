@@ -90,6 +90,7 @@ RUN set -xe; \
             build-base \
             gcc \
             imagemagick-dev \
+            jpeg-dev \
             libffi-dev \
             linux-headers \
             mariadb-dev \
