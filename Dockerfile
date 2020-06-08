@@ -45,20 +45,20 @@ RUN set -xe; \
         bash \
         ca-certificates \
         curl \
-        freetype=2.10.1-r0 \
+        freetype \
         git \
-        gmp=6.1.2-r1 \
+        gmp \
         gzip \
-        icu-libs=64.2-r1 \
-        imagemagick=7.0.9.7-r0 \
+        icu-libs \
+        imagemagick=7.0.10.12-r0 \
         less \
         libbz2=1.0.8-r1 \
         libjpeg-turbo-utils \
-        libjpeg-turbo=2.0.4-r0 \
-        libldap=2.4.48-r2 \
+        libjpeg-turbo=2.0.4-r1 \
+        libldap=2.4.50-r0 \
         libmemcached-libs=1.0.18-r4 \
         libpng=1.6.37-r1 \
-        librdkafka=1.2.2-r0 \
+        librdkafka=1.4.2-r0 \
         libxslt=1.1.34-r0 \
         make \
         mariadb-client \
@@ -67,7 +67,7 @@ RUN set -xe; \
         openssh-client \
         patch \
         postgresql-client \
-        rabbitmq-c=0.10.0-r0 \
+        rabbitmq-c=0.10.0-r1 \
         rsync \
         su-exec \
         sudo \
@@ -76,7 +76,7 @@ RUN set -xe; \
         tmux \
         unzip \
         wget \
-        yaml=0.2.2-r1; \
+        yaml=0.2.4-r1; \
     \
     # Install redis-cli.
     apk add --update --no-cache redis; \
