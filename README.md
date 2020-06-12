@@ -13,7 +13,6 @@
     * [`-debug`](#-debug)
 * [Environment Variables](#environment-variables)
 * [Build arguments](#build-arguments)
-* [Libraries](#libraries)
 * [Changelog](#changelog)    
 * [Users and permissions](#users-and-permissions)
 * [Crond](#crond)
@@ -28,7 +27,7 @@
 
 About images:
 
-* All images are based on Alpine Linux
+* All images based on Alpine Linux
 * Base image: [python](https://github.com/docker-library/python)
 * [Travis CI builds](https://travis-ci.com/wodby/python) 
 * [Docker Hub](https://hub.docker.com/r/wodby/python) 
@@ -98,10 +97,6 @@ Include all changes from `-dev` images and additionally:
 | `WODBY_USER_ID`  | `1000`        |
 
 Change `WODBY_USER_ID` and `WODBY_GROUP_ID` mainly for local dev version of images, if it matches with existing system user/group ids the latter will be deleted. 
-
-## Libraries
-
-All essential linux libraries are freezed and updates will be reflected in [changelog](#changelog). 
 
 ## Changelog
 

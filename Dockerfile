@@ -50,16 +50,16 @@ RUN set -xe; \
         gmp \
         gzip \
         icu-libs \
-        imagemagick=7.0.10.12-r0 \
+        imagemagick \
         less \
-        libbz2=1.0.8-r1 \
+        libbz2 \
         libjpeg-turbo-utils \
-        libjpeg-turbo=2.0.4-r1 \
-        libldap=2.4.50-r0 \
-        libmemcached-libs=1.0.18-r4 \
-        libpng=1.6.37-r1 \
-        librdkafka=1.4.2-r0 \
-        libxslt=1.1.34-r0 \
+        libjpeg-turbo \
+        libldap \
+        libmemcached-libs \
+        libpng \
+        librdkafka \
+        libxslt \
         make \
         mariadb-client \
         nano \
@@ -67,7 +67,7 @@ RUN set -xe; \
         openssh-client \
         patch \
         postgresql-client \
-        rabbitmq-c=0.10.0-r1 \
+        rabbitmq-c \
         rsync \
         su-exec \
         sudo \
@@ -76,7 +76,7 @@ RUN set -xe; \
         tmux \
         unzip \
         wget \
-        yaml=0.2.4-r1; \
+        yaml; \
     \
     # Install redis-cli.
     apk add --update --no-cache redis; \
