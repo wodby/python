@@ -5,8 +5,8 @@ services:
 
 env:
   global:
-    - PYTHON37=3.7.7
-    - PYTHON36=3.6.10
+    - PYTHON37=3.7.8
+    - PYTHON36=3.6.11
     - PYTHON35=3.5.9
   matrix:
     - PYTHON_VER="${PYTHON37}" TAGS=3.7,3,latest
