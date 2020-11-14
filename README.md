@@ -1,25 +1,25 @@
 # Python Docker Container Images
 
-[![Build Status](https://travis-ci.com/wodby/python.svg?branch=master)](https://travis-ci.com/wodby/python)
+[![Build Status](https://github.com/wodby/python/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/python/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/python.svg)](https://hub.docker.com/r/wodby/python)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/python.svg)](https://hub.docker.com/r/wodby/python)
 [![Docker Layers](https://images.microbadger.com/badges/image/wodby/python.svg)](https://microbadger.com/images/wodby/python)
 
 ## Table of Contents
 
-* [Docker Images](#docker-images)
-    * [`-dev`](#-dev)
-    * [`-dev-macos`](#-dev-macos)
-    * [`-debug`](#-debug)
-* [Environment Variables](#environment-variables)
-* [Build arguments](#build-arguments)
-* [Changelog](#changelog)    
-* [Users and permissions](#users-and-permissions)
-* [Crond](#crond)
-* [SSHD](#sshd)
-* [Adding SSH key](#adding-ssh-key)
-* [Complete Python stack](#complete-python-stack)
-* [Orchestration Actions](#orchestration-actions)
+- [Docker Images](#docker-images)
+    - [`-dev`](#-dev)
+    - [`-dev-macos`](#-dev-macos)
+    - [`-debug`](#-debug)
+- [Environment Variables](#environment-variables)
+- [Build arguments](#build-arguments)
+- [Changelog](#changelog)    
+- [Users and permissions](#users-and-permissions)
+- [Crond](#crond)
+- [SSHD](#sshd)
+- [Adding SSH key](#adding-ssh-key)
+- [Complete Python stack](#complete-python-stack)
+- [Orchestration Actions](#orchestration-actions)
 
 ## Docker Images
 
@@ -27,22 +27,22 @@
 
 About images:
 
-* All images based on Alpine Linux
-* Base image: [python](https://github.com/docker-library/python)
-* [Travis CI builds](https://travis-ci.com/wodby/python) 
-* [Docker Hub](https://hub.docker.com/r/wodby/python) 
+- All images based on Alpine Linux
+- Base image: [python](https://github.com/docker-library/python)
+- [GitHub actions builds](https://github.com/wodby/python/actions) 
+- [Docker Hub](https://hub.docker.com/r/wodby/python) 
 
 Supported tags and respective `Dockerfile` links:
 
-* `3.7`, `3`, `latest` [_(Dockerfile)_]
-* `3.6` [_(Dockerfile)_]
-* `3.5` [_(Dockerfile)_]
-* `3.7-dev`, `3-dev` [_(Dockerfile)_]
-* `3.6-dev` [_(Dockerfile)_]
-* `3.5-dev` [_(Dockerfile)_]
-* `3.7-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
-* `3.6-dev-macos` [_(Dockerfile)_]
-* `3.5-dev-macos` [_(Dockerfile)_]
+- `3.7`, `3`, `latest` [_(Dockerfile)_]
+- `3.6` [_(Dockerfile)_]
+- `3.5` [_(Dockerfile)_]
+- `3.7-dev`, `3-dev` [_(Dockerfile)_]
+- `3.6-dev` [_(Dockerfile)_]
+- `3.5-dev` [_(Dockerfile)_]
+- `3.7-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.6-dev-macos` [_(Dockerfile)_]
+- `3.5-dev-macos` [_(Dockerfile)_]
 
 [_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
 
