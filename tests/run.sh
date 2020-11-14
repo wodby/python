@@ -27,7 +27,7 @@ wait_for_cron() {
 }
 
 docker_exec() {
-    docker-compose exec "${@}"
+    docker-compose exec -T "${@}"
 }
 
 run_action() {
