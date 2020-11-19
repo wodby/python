@@ -8,41 +8,43 @@ services:
       NGINX_VHOST_PRESET: django
       NGINX_BACKEND_HOST: python
     volumes:
-      - codebase:/var/www/html
+    - codebase:/var/www/html
     depends_on:
-      - python
+    - python
 
   sshd:
     image: $IMAGE
     command: sudo /usr/sbin/sshd -De
     volumes:
-      - ./authorized_keys:/home/wodby/.ssh/authorized_keys
+    - ./authorized_keys:/home/wodby/.ssh/authorized_keys
     environment:
       DEBUG: 1
 
   python:
-    image: $IMAGE
+    build:
+      context: .
+      args:
+        IMAGE: $IMAGE
     environment:
       SSH_DISABLE_STRICT_KEY_CHECKING: 1
-      GUNICORN_APP: mysite.wsgi:application
       DEBUG: 1
       ROWS: 80
     volumes:
-      - codebase:/usr/src/app
-      - ./tests.sh:/usr/local/bin/tests.sh
-      - ./id_rsa:/home/wodby/.ssh/id_rsa
+    - codebase:/usr/src/app
+    - ./tests.sh:/usr/local/bin/tests.sh
+    - ./id_rsa:/home/wodby/.ssh/id_rsa
     # Workaround to Nginx fixing permissions to uid 1000 when we run -dev-macos variants.
-    command: bash -c "sleep 5 && sudo init_container && pip install gunicorn Django && django-admin startproject mysite . && /etc/init.d/gunicorn"
+    command: bash -c "sleep 5 && sudo init_container && /etc/init.d/gunicorn"
     depends_on:
-      - sshd
+    - sshd
 
   crond:
     image: $IMAGE
     command: sudo -E crond -f -d 0
     volumes:
-      - ./crontab:/etc/crontabs/www-data
+    - ./crontab:/etc/crontabs/www-data
     depends_on:
-      - sshd
+    - sshd
 
 volumes:
   codebase:

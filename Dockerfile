@@ -168,8 +168,5 @@ COPY templates /etc/gotpl/
 COPY docker-entrypoint.sh /
 COPY bin /usr/local/bin/
 
-ONBUILD COPY requirements.txt ./
-ONBUILD RUN pip install --no-cache-dir -r requirements.txt
-
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/etc/init.d/gunicorn"]
