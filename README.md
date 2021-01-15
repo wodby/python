@@ -47,7 +47,7 @@ Supported tags and respective `Dockerfile` links:
 - `3.7-dev-macos` [_(Dockerfile)_]
 - `3.6-dev-macos` [_(Dockerfile)_]
 
-[_(Dockerfile)_](https://github.com/wodby/python/tree/master/Dockerfile)
+[_(Dockerfile)_]: https://github.com/wodby/python/tree/master/Dockerfile
 
 ### `-dev`
 
