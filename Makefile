@@ -51,8 +51,7 @@ build:
 
 test:
 ifneq ($(PYTHON_DEV),)
-	@echo "Tests temporarily disabled."
-#	cd ./tests && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests && IMAGE=$(REPO):$(TAG) ./run.sh
 else
 	@echo "We run tests only for DEV images."
 endif
