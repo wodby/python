@@ -18,8 +18,8 @@ python -c 'import django; print(django.get_version())'
 
 ssh sshd cat /home/wodby/.ssh/authorized_keys | grep -q admin@example.com
 
-#echo "import os" >> myapp/settings.py
-#echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> myapp/settings.py
+echo "import os" >> myapp/settings.py
+echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> myapp/settings.py
 python manage.py collectstatic --no-input
 
 curl -s localhost:8080 | grep -q "${django_msg}"
