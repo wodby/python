@@ -14,7 +14,7 @@ env:
   PYTHON39: 3.9.1
   PYTHON38: 3.8.7
   PYTHON37: 3.7.10
-  PYTHON36: 3.6.12
+  PYTHON36: 3.6.13
 
 jobs:
   python39:
