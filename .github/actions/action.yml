@@ -16,12 +16,10 @@ inputs:
   tags:
     description: image tags
     required: true
-  username:
-    description: docker username
-    required: true
-  password:
-    description: docker password
-    required: true
+  platform:
+    description: os/arch
+    required: false
+    default: linux/amd64
 runs:
   using: "composite"
   steps:
@@ -31,12 +29,12 @@ runs:
       PYTHON_DEV: ${{ inputs.dev }}
       WODBY_USER_ID: ${{ inputs.user_id }}
       WODBY_GROUP_ID: ${{ inputs.group_id }}
-      DOCKER_USERNAME: ${{ inputs.username }}
-      DOCKER_PASSWORD: ${{ inputs.password }}
       TAGS: ${{ inputs.tags }}
+      PLATFORM: ${{ inputs.platform }}
     run: |
       set -e
-      make
+      make buildx-build-amd64
       make test
+      make buildx-build
       . $GITHUB_ACTION_PATH/release.sh
     shell: bash

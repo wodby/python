@@ -8,6 +8,8 @@ BASE_IMAGE_TAG=$(PYTHON_VER)-alpine
 REPO = wodby/python
 NAME = python-$(PYTHON_VER_MINOR)
 
+PLATFORM ?= linux/amd64
+
 ifeq ($(WODBY_USER_ID),)
     WODBY_USER_ID := 1000
 endif
@@ -36,12 +38,44 @@ ifneq ($(STABILITY_TAG),)
     endif
 endif
 
-.PHONY: build test push shell run start stop logs clean release
+.PHONY: build buildx-build buildx-build-amd64 buildx-push test push shell run start stop logs clean release
 
 default: build
 
 build:
 	docker build -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg PYTHON_VER=$(PYTHON_VER) \
+		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
+		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
+		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
+		./
+
+# --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
+# we need to save cache to run tests first.
+buildx-build-amd64:
+	docker buildx build --platform linux/amd64 -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg PYTHON_VER=$(PYTHON_VER) \
+		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
+		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
+		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
+		--cache-from "type=local,src=/tmp/.buildx-cache" \
+		--cache-to "type=local,dest=/tmp/.buildx-cache" \
+		--load \
+		./
+
+buildx-build:
+	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg PYTHON_VER=$(PYTHON_VER) \
+		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
+		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
+		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
+		./
+
+buildx-push:
+	docker buildx build --platform $(PLATFORM) --push -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
