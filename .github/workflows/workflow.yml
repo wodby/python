@@ -11,7 +11,7 @@ on:
   pull_request:
 
 env:
-  PYTHON39: 3.9.1
+  PYTHON39: 3.9.2
   PYTHON38: 3.8.7
   PYTHON37: 3.7.10
   PYTHON36: 3.6.13
