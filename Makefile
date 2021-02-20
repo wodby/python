@@ -60,8 +60,6 @@ buildx-build-amd64:
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
 		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
-		--cache-from "type=local,src=/tmp/.buildx-cache" \
-		--cache-to "type=local,dest=/tmp/.buildx-cache" \
 		--load \
 		./
 
