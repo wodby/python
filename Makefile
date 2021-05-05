@@ -1,6 +1,6 @@
 -include env_make
 
-PYTHON_VER ?= 3.9.4
+PYTHON_VER ?= 3.9.5
 PYTHON_VER_MINOR := $(shell v='$(PYTHON_VER)'; echo "$${v%.*}")
 
 BASE_IMAGE_TAG=$(PYTHON_VER)-alpine
