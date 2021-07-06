@@ -3,8 +3,6 @@
 PYTHON_VER ?= 3.9.6
 PYTHON_VER_MINOR := $(shell v='$(PYTHON_VER)'; echo "$${v%.*}")
 
-BASE_IMAGE_TAG=$(PYTHON_VER)-alpine3.13
-
 REPO = wodby/python
 NAME = python-$(PYTHON_VER_MINOR)
 
@@ -44,7 +42,6 @@ default: build
 
 build:
 	docker build -t $(REPO):$(TAG) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
@@ -55,7 +52,6 @@ build:
 # we need to save cache to run tests first.
 buildx-build-amd64:
 	docker buildx build --platform linux/amd64 -t $(REPO):$(TAG) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
@@ -65,7 +61,6 @@ buildx-build-amd64:
 
 buildx-build:
 	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
@@ -74,7 +69,6 @@ buildx-build:
 
 buildx-push:
 	docker buildx build --platform $(PLATFORM) --push -t $(REPO):$(TAG) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
