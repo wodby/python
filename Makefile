@@ -3,7 +3,7 @@
 PYTHON_VER ?= 3.9.6
 PYTHON_VER_MINOR := $(shell v='$(PYTHON_VER)'; echo "$${v%.*}")
 
-BASE_IMAGE_TAG=$(PYTHON_VER)-alpine
+BASE_IMAGE_TAG=$(PYTHON_VER)-alpine3.13
 
 REPO = wodby/python
 NAME = python-$(PYTHON_VER_MINOR)
