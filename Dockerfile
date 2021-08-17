@@ -1,6 +1,6 @@
 ARG PYTHON_VER
 
-FROM python:${PYTHON_VER}-alpine3.13
+FROM python:${PYTHON_VER}-alpine
 
 ARG PYTHON_DEV
 
