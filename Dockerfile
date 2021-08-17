@@ -28,7 +28,7 @@ ARG TARGETPLATFORM
 
 RUN set -xe; \
     \
-    addgroup -g 82 -S www-data; \
+#    addgroup -g 82 -S www-data; \
     adduser -u 82 -D -S -G www-data www-data; \
     \
     # Delete existing user/group if uid/gid occupied.
