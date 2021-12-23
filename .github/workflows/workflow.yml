@@ -11,6 +11,7 @@ on:
   pull_request:
 
 env:
+  PYTHON310: '3.10.1'
   PYTHON39: '3.9.9'
   PYTHON38: 3.8.12
   PYTHON37: 3.7.12
@@ -19,6 +20,15 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
+  python310:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/setup-buildx-action@v1
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.PYTHON310 }}
+        tags: 3.10,3,latest
   python39:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +37,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.PYTHON39 }}
-        tags: 3.9,3,latest
+        tags: 3.9
   python38:
     runs-on: ubuntu-latest
     steps:
@@ -56,6 +66,16 @@ jobs:
         version: ${{ env.PYTHON36 }}
         tags: 3.6
   ### dev
+  python310-dev:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/setup-buildx-action@v1
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.PYTHON310 }}
+        dev: 1
+        tags: 3.10-dev,3-dev,dev
   python39-dev:
     runs-on: ubuntu-latest
     steps:
@@ -65,7 +85,7 @@ jobs:
       with:
         version: ${{ env.PYTHON39 }}
         dev: 1
-        tags: 3.9-dev,3-dev,dev
+        tags: 3.9-dev
   python38-dev:
     runs-on: ubuntu-latest
     steps:
@@ -97,6 +117,22 @@ jobs:
         dev: 1
         tags: 3.6-dev
   ### dev-macos
+  python310-dev-macos:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/setup-qemu-action@v1
+      with:
+        platforms: amd64,arm64
+    - uses: docker/setup-buildx-action@v1
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.PYTHON310 }}
+        dev: 1
+        user_id: 501
+        group_id: 20
+        tags: 3.10-dev-macos,3-dev-macos,dev-macos
+        platform: linux/amd64,linux/arm64
   python39-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -111,7 +147,7 @@ jobs:
         dev: 1
         user_id: 501
         group_id: 20
-        tags: 3.9-dev-macos,3-dev-macos,dev-macos
+        tags: 3.9-dev-macos
         platform: linux/amd64,linux/arm64
   python38-dev-macos:
     runs-on: ubuntu-latest
