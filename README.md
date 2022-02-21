@@ -37,17 +37,14 @@ Supported tags and respective `Dockerfile` links:
 - `3.9` [_(Dockerfile)_]
 - `3.8` [_(Dockerfile)_]
 - `3.7` [_(Dockerfile)_]
-- `3.6` [_(Dockerfile)_]
 - `3.10-dev`, `3-dev` [_(Dockerfile)_]
 - `3.9-dev` [_(Dockerfile)_]
 - `3.8-dev` [_(Dockerfile)_]
 - `3.7-dev` [_(Dockerfile)_]
-- `3.6-dev` [_(Dockerfile)_]
 - `3.10-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
 - `3.9-dev-macos` [_(Dockerfile)_]
 - `3.8-dev-macos` [_(Dockerfile)_]
 - `3.7-dev-macos` [_(Dockerfile)_]
-- `3.6-dev-macos` [_(Dockerfile)_]
 
 [_(Dockerfile)_]: https://github.com/wodby/python/tree/master/Dockerfile
 
