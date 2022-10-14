@@ -12,7 +12,7 @@ on:
 
 env:
   PYTHON310: '3.10.8'
-  PYTHON39: '3.9.14'
+  PYTHON39: '3.9.15'
   PYTHON38: '3.8.14'
   PYTHON37: '3.7.15'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
