@@ -22,7 +22,7 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/python:3.10-X.X.X`) which correspond to [git tags](https://github.com/wodby/python/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags (`wodby/python:3-X.X.X`) which correspond to [git tags](https://github.com/wodby/python/releases). We strongly recommend using images only with stability tags. 
 
 About images:
 
@@ -33,15 +33,18 @@ About images:
 
 Supported tags and respective `Dockerfile` links:
 
-- `3.10`, `3`, `latest` [_(Dockerfile)_]
+- `3.11`, `3`, `latest` [_(Dockerfile)_]
+- `3.10` [_(Dockerfile)_]
 - `3.9` [_(Dockerfile)_]
 - `3.8` [_(Dockerfile)_]
 - `3.7` [_(Dockerfile)_]
-- `3.10-dev`, `3-dev` [_(Dockerfile)_]
+- `3.11-dev`, `3-dev` [_(Dockerfile)_]
+- `3.10-dev` [_(Dockerfile)_]
 - `3.9-dev` [_(Dockerfile)_]
 - `3.8-dev` [_(Dockerfile)_]
 - `3.7-dev` [_(Dockerfile)_]
-- `3.10-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.11-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.10-dev-macos` [_(Dockerfile)_]
 - `3.9-dev-macos` [_(Dockerfile)_]
 - `3.8-dev-macos` [_(Dockerfile)_]
 - `3.7-dev-macos` [_(Dockerfile)_]
