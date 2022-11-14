@@ -37,7 +37,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.PYTHON310 }}
-        tags: 3.10
+        tags: '3.10'
   python39:
     runs-on: ubuntu-latest
     steps:
