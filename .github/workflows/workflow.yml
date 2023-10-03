@@ -11,15 +11,24 @@ on:
   pull_request:
 
 env:
+  PYTHON312: '3.12.0'
   PYTHON311: '3.11.6'
   PYTHON310: '3.10.13'
   PYTHON39: '3.9.18'
   PYTHON38: '3.8.18'
-  PYTHON37: '3.7.17'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
+  python312:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/setup-buildx-action@v1
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.PYTHON312 }}
+        tags: 3.12,3,latest
   python311:
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +37,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.PYTHON311 }}
-        tags: 3.11,3,latest
+        tags: '3.11'
   python310:
     runs-on: ubuntu-latest
     steps:
@@ -56,16 +65,17 @@ jobs:
       with:
         version: ${{ env.PYTHON38 }}
         tags: 3.8
-  python37:
+  ### dev
+  python312-dev:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: ${{ env.PYTHON37 }}
-        tags: 3.7
-  ### dev
+        version: ${{ env.PYTHON312 }}
+        dev: 1
+        tags: 3.12-dev,3-dev,dev
   python311-dev:
     runs-on: ubuntu-latest
     steps:
@@ -75,7 +85,7 @@ jobs:
       with:
         version: ${{ env.PYTHON311 }}
         dev: 1
-        tags: 3.11-dev,3-dev,dev
+        tags: 3.11-dev
   python310-dev:
     runs-on: ubuntu-latest
     steps:
@@ -106,17 +116,23 @@ jobs:
         version: ${{ env.PYTHON38 }}
         dev: 1
         tags: 3.8-dev
-  python37-dev:
+  ### dev-macos
+  python312-dev-macos:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: docker/setup-qemu-action@v1
+      with:
+        platforms: amd64,arm64
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: ${{ env.PYTHON37 }}
+        version: ${{ env.PYTHON312 }}
         dev: 1
-        tags: 3.7-dev
-  ### dev-macos
+        user_id: 501
+        group_id: 20
+        tags: 3.12-dev-macos,3-dev-macos,dev-macos
+        platform: linux/amd64,linux/arm64
   python311-dev-macos:
     runs-on: ubuntu-latest
     steps:
@@ -131,7 +147,7 @@ jobs:
         dev: 1
         user_id: 501
         group_id: 20
-        tags: 3.11-dev-macos,3-dev-macos,dev-macos
+        tags: 3.11-dev-macos
         platform: linux/amd64,linux/arm64
   python310-dev-macos:
     runs-on: ubuntu-latest
@@ -180,20 +196,4 @@ jobs:
         user_id: 501
         group_id: 20
         tags: 3.8-dev-macos
-        platform: linux/amd64,linux/arm64
-  python37-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON37 }}
-        dev: 1
-        user_id: 501
-        group_id: 20
-        tags: 3.7-dev-macos
         platform: linux/amd64,linux/arm64

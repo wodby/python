@@ -33,21 +33,21 @@ About images:
 
 Supported tags and respective `Dockerfile` links:
 
-- `3.11`, `3`, `latest` [_(Dockerfile)_]
+- `3.12`, `3`, `latest` [_(Dockerfile)_]
+- `3.11` [_(Dockerfile)_]
 - `3.10` [_(Dockerfile)_]
 - `3.9` [_(Dockerfile)_]
 - `3.8` [_(Dockerfile)_]
-- `3.7` [_(Dockerfile)_]
-- `3.11-dev`, `3-dev` [_(Dockerfile)_]
+- `3.12-dev`, `3-dev` [_(Dockerfile)_]
+- `3.11-dev` [_(Dockerfile)_]
 - `3.10-dev` [_(Dockerfile)_]
 - `3.9-dev` [_(Dockerfile)_]
 - `3.8-dev` [_(Dockerfile)_]
-- `3.7-dev` [_(Dockerfile)_]
-- `3.11-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.12-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.11-dev-macos` [_(Dockerfile)_]
 - `3.10-dev-macos` [_(Dockerfile)_]
 - `3.9-dev-macos` [_(Dockerfile)_]
 - `3.8-dev-macos` [_(Dockerfile)_]
-- `3.7-dev-macos` [_(Dockerfile)_]
 
 [_(Dockerfile)_]: https://github.com/wodby/python/tree/master/Dockerfile
 
