@@ -12,7 +12,7 @@ on:
 
 env:
   PYTHON312: '3.12.2'
-  PYTHON311: '3.11.8'
+  PYTHON311: '3.11.9'
   PYTHON310: '3.10.14'
   PYTHON39: '3.9.19'
   PYTHON38: '3.8.19'
