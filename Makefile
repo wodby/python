@@ -1,6 +1,6 @@
 -include env_make
 
-PYTHON_VER ?= 3.12.7
+PYTHON_VER ?= 3.13.0
 PYTHON_VER_MINOR := $(shell v='$(PYTHON_VER)'; echo "$${v%.*}")
 
 REPO = wodby/python
