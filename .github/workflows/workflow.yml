@@ -18,6 +18,8 @@ env:
   PYTHON39: '3.9.20'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  # https://github.com/docker/compose/issues/8538
+  DOCKER_BUILDKIT: 0
 
 jobs:
   python313:
