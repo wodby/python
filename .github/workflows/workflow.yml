@@ -15,7 +15,7 @@ env:
   PYTHON312: '3.12.11'
   PYTHON311: '3.11.13'
   PYTHON310: '3.10.18'
-  PYTHON39: '3.9.22'
+  PYTHON39: '3.9.23'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   # Set DOCKER_BUILDKIT=0 to avoid error in tests 
