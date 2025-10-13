@@ -19,10 +19,6 @@ env:
   PYTHON39: '3.9.24'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  # Set DOCKER_BUILDKIT=0 to avoid error in tests 
-  # when compose.yml fails to pull info on local build image from docker registry.  
-  # https://github.com/docker/compose/issues/8538
-  DOCKER_BUILDKIT: 0
 
 jobs:
   setup:
