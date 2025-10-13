@@ -1,12 +1,12 @@
 -include env_make
 
-PYTHON_VER ?= 3.13.1
+PYTHON_VER ?= 3.14.0
 PYTHON_VER_MINOR := $(shell v='$(PYTHON_VER)'; echo "$${v%.*}")
 
 REPO = wodby/python
 NAME = python-$(PYTHON_VER_MINOR)
 
-PLATFORM ?= linux/amd64
+PLATFORM ?= linux/arm64
 
 ifeq ($(WODBY_USER_ID),)
     WODBY_USER_ID := 1000
@@ -20,23 +20,25 @@ ifeq ($(TAG),)
     ifneq ($(PYTHON_DEBUG),)
         TAG ?= $(PYTHON_VER_MINOR)-debug
     else ifneq ($(PYTHON_DEV),)
-    	TAG ?= $(PYTHON_VER_MINOR)-dev
+		ifeq ($(WODBY_USER_ID),501)
+			TAG := $(PYTHON_VER_MINOR)-dev-macos
+			NAME := $(NAME)-dev-macos
+		else
+			TAG := $(PYTHON_VER_MINOR)-dev
+			NAME := $(NAME)-dev
+		endif    
     else
         TAG ?= $(PYTHON_VER_MINOR)
     endif
 endif
 
-ifneq ($(PYTHON_DEV),)
-    NAME := $(NAME)-dev
+IMAGETOOLS_TAG ?= $(TAG)
+
+ifneq ($(ARCH),)
+	override TAG := $(TAG)-$(ARCH)
 endif
 
-ifneq ($(STABILITY_TAG),)
-    ifneq ($(TAG),latest)
-        override TAG := $(TAG)-$(STABILITY_TAG)
-    endif
-endif
-
-.PHONY: build buildx-build buildx-build-amd64 buildx-push test push shell run start stop logs clean release
+.PHONY: build build-debug buildx-build buildx-push test push shell run start stop logs clean release
 
 default: build
 
@@ -48,16 +50,14 @@ build:
 		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
 		./
 
-# --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
-# we need to save cache to run tests first.
-buildx-build-amd64:
-	docker buildx build --platform linux/amd64 -t $(REPO):$(TAG) \
+build-debug:
+	docker build -t $(REPO):$(TAG) \
 		--build-arg PYTHON_VER=$(PYTHON_VER) \
 		--build-arg PYTHON_DEV=$(PYTHON_DEV) \
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
 		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
-		--load \
-		./
+		--build-arg PECL_HTTP_PROXY=$(PECL_HTTP_PROXY) \
+		--no-cache --progress=plain ./ 2>&1 | tee build.log
 
 buildx-build:
 	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
@@ -74,6 +74,12 @@ buildx-push:
 		--build-arg WODBY_USER_ID=$(WODBY_USER_ID) \
 		--build-arg WODBY_GROUP_ID=$(WODBY_GROUP_ID) \
 		./
+
+buildx-imagetools-create:
+	docker buildx imagetools create -t $(REPO):$(IMAGETOOLS_TAG) \
+				  $(REPO):$(TAG)-amd64 \
+				  $(REPO):$(TAG)-arm64
+.PHONY: buildx-imagetools-create 
 
 test:
 ifneq ($(PYTHON_DEV),)

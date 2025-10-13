@@ -1,17 +1,52 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
-if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]]; then
-    docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
+if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]]; then      
+  minor_ver="${PYTHON_VER%.*}"
+  minor_tag="${minor_ver}"
+  major_tag="${minor_ver%.*}"
 
-    if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-      export STABILITY_TAG="${GITHUB_REF##*/}"
+  if [[ -n "${PYTHON_DEV}" ]]; then            
+    if [[ "${WODBY_USER_ID}" == "501" ]]; then
+      minor_tag="${minor_tag}-dev-macos"
+      if [[ -n "${LATEST_MAJOR}" ]]; then    
+        major_tag="${major_tag}-dev-macos"
+      fi
+    else 
+      minor_tag="${minor_tag}-dev"
+      if [[ -n "${LATEST_MAJOR}" ]]; then
+        major_tag="${major_tag}-dev"
+      fi
     fi
+  fi
 
-    IFS=',' read -ra tags <<< "${TAGS}"
+  tags=("${minor_tag}")
+  if [[ -n "${LATEST_MAJOR}" ]]; then
+     tags+=("${major_tag}")
+  fi
 
-    for tag in "${tags[@]}"; do
-        make buildx-push TAG="${tag}";
-    done
+  if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+    stability_tag=("${GITHUB_REF##*/}")
+    tags=("${minor_tag}-${stability_tag}")
+    if [[ -n "${LATEST_MAJOR}" ]]; then
+      tags+=("${major_tag}-${stability_tag}")
+    fi
+  else          
+    if [[ -n "${LATEST}" ]]; then
+      if [[ -z "${PYTHON_DEV}" ]]; then
+        tags+=("latest")
+      else
+        if [[ "${WODBY_USER_ID}" == "501" ]]; then
+          tags+=("dev-macos")
+        else
+          tags+=("dev")
+        fi
+      fi
+    fi
+  fi
+
+  for tag in "${tags[@]}"; do
+    make buildx-imagetools-create IMAGETOOLS_TAG=${tag}
+  done
 fi

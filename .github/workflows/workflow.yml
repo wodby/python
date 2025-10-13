@@ -3,14 +3,15 @@ name: Build docker image
 on:
   push:
     branches:
-    - master
+      - master
 
     tags:
-    - '*'
+      - '*'
 
   pull_request:
 
 env:
+  PYTHON314: '3.14.0'
   PYTHON313: '3.13.1'
   PYTHON312: '3.12.8'
   PYTHON311: '3.11.11'
@@ -24,180 +25,96 @@ env:
   DOCKER_BUILDKIT: 0
 
 jobs:
-  python313:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      python-versions: ${{ steps.set-matrix.outputs.python-versions }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON313 }}
-        tags: 3.13,3,latest
-  python312:
+      - id: set-matrix
+        run: |
+          cat << 'EOF' > versions.json
+          [
+            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": true, "latest_major": true},
+            {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": false, "latest_major": false},
+            {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": false, "latest_major": false},
+            {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": false, "latest_major": false},
+            {"key": "python310", "version": "${{ env.PYTHON310 }}", "latest": false, "latest_major": false},
+            {"key": "python39", "version": "${{ env.PYTHON39 }}", "latest": false, "latest_major": false}
+          ]
+          EOF
+          echo "python-versions=$(cat versions.json | jq -c .)" >> $GITHUB_OUTPUT
+
+  build:
+    needs: setup
+    strategy:
+      matrix:
+        python: ${{ fromJson(needs.setup.outputs.python-versions) }}
+        arch:
+          - amd64
+          - arm64
+        dev:
+          - ''
+          - '1'
+        user_id:
+          - 1000
+          - 501
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+          - user_id: 501
+            group_id: 20
+            dev: 1
+        exclude:
+          - dev: ''
+            user_id: 501
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: build and push
+        env:
+          PYTHON_VER: ${{ matrix.python.version }}
+          ARCH: ${{ matrix.arch }}
+          PYTHON_DEV: ${{ matrix.dev }}
+          WODBY_USER_ID: ${{ matrix.user_id }}
+          WODBY_GROUP_ID: ${{ matrix.group_id }}
+        run: |
+          make
+          make test
+          make push
+
+  push:
     runs-on: ubuntu-latest
+    needs:
+      - setup
+      - build
+    strategy:
+      matrix:
+        python: ${{ fromJson(needs.setup.outputs.python-versions) }}
+        dev:
+          - ''
+          - '1'
+        user_id:
+          - 1000
+          - 501
+        exclude:
+          - dev: ''
+            user_id: 501
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
+      - uses: actions/checkout@v5
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - uses: ./.github/actions
         with:
-          version: ${{ env.PYTHON312 }}
-          tags: '3.12'        
-  python311:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON311 }}
-        tags: '3.11'
-  python310:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON310 }}
-        tags: '3.10'
-  python39:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON39 }}
-        tags: 3.9
-  ### dev
-  python313-dev:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON313 }}
-        dev: 1
-        tags: 3.13-dev,3-dev,dev
-  python312-dev:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
-      - uses: ./.github/actions
-        with:
-          version: ${{ env.PYTHON312 }}
-          dev: 1
-          tags: 3.12-dev        
-  python311-dev:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON311 }}
-        dev: 1
-        tags: 3.11-dev
-  python310-dev:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON310 }}
-        dev: 1
-        tags: 3.10-dev
-  python39-dev:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON39 }}
-        dev: 1
-        tags: 3.9-dev
-  ### dev-macos
-  python313-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-qemu-action@v3
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON313 }}
-        dev: 1
-        user_id: 501
-        group_id: 20
-        tags: 3.13-dev-macos,3-dev-macos,dev-macos
-        platform: linux/amd64,linux/arm64
-  python312-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-qemu-action@v3
-        with:
-          platforms: amd64,arm64
-      - uses: docker/setup-buildx-action@v3
-      - uses: ./.github/actions
-        with:
-          version: ${{ env.PYTHON312 }}
-          dev: 1
-          user_id: 501
-          group_id: 20
-          tags: 3.12-dev-macos
-          platform: linux/amd64,linux/arm64        
-  python311-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-qemu-action@v3
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON311 }}
-        dev: 1
-        user_id: 501
-        group_id: 20
-        tags: 3.11-dev-macos
-        platform: linux/amd64,linux/arm64
-  python310-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-qemu-action@v3
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON310 }}
-        dev: 1
-        user_id: 501
-        group_id: 20
-        tags: 3.10-dev-macos
-        platform: linux/amd64,linux/arm64
-  python39-dev-macos:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: docker/setup-qemu-action@v3
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v3
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.PYTHON39 }}
-        dev: 1
-        user_id: 501
-        group_id: 20
-        tags: 3.9-dev-macos
-        platform: linux/amd64,linux/arm64
+          version: ${{ matrix.python.version }}
+          dev: ${{ matrix.dev }}
+          user_id: ${{ matrix.user_id }}
+          latest: ${{ matrix.python.latest }}
+          latest_major: ${{ matrix.python.latest_major }}
