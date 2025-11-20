@@ -16,9 +16,6 @@ env:
   PYTHON312: '3.12.12'
   PYTHON311: '3.11.14'
   PYTHON310: '3.10.19'
-  PYTHON39: '3.9.25'
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   setup:
@@ -34,8 +31,7 @@ jobs:
             {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": false, "latest_major": false},
             {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": false, "latest_major": false},
             {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": false, "latest_major": false},
-            {"key": "python310", "version": "${{ env.PYTHON310 }}", "latest": false, "latest_major": false},
-            {"key": "python39", "version": "${{ env.PYTHON39 }}", "latest": false, "latest_major": false}
+            {"key": "python310", "version": "${{ env.PYTHON310 }}", "latest": false, "latest_major": false}
           ]
           EOF
           echo "python-versions=$(cat versions.json | jq -c .)" >> $GITHUB_OUTPUT
