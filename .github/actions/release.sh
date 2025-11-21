@@ -33,7 +33,7 @@ if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]];
       tags+=("${major_tag}-${stability_tag}")
     fi
   else          
-    if [[ -n "${LATEST}" ]]; thenn
+    if [[ -n "${LATEST}" ]]; then
       if [[ -z "${PYTHON_DEV}" ]]; then
         tags+=("latest")
       else
