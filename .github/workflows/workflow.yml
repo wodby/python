@@ -27,11 +27,11 @@ jobs:
         run: |
           cat << 'EOF' > versions.json
           [
-            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": true, "latest_major": true},
-            {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": false, "latest_major": false},
-            {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": false, "latest_major": false},
-            {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": false, "latest_major": false},
-            {"key": "python310", "version": "${{ env.PYTHON310 }}", "latest": false, "latest_major": false}
+            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": "1", "latest_major": "1"},
+            {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": "", "latest_major": ""},
+            {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": "", "latest_major": ""},
+            {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": "", "latest_major": ""},
+            {"key": "python310", "version": "${{ env.PYTHON310 }}", "latest": "", "latest_major": ""}
           ]
           EOF
           echo "python-versions=$(cat versions.json | jq -c .)" >> $GITHUB_OUTPUT
