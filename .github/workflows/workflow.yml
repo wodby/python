@@ -27,7 +27,7 @@ jobs:
         run: |
           cat << 'EOF' > versions.json
           [
-            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": "1", "latest_major": "1"},
+            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": "latest", "latest_major": "3"},
             {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": "", "latest_major": ""},
             {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": "", "latest_major": ""},
             {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": "", "latest_major": ""},
@@ -46,7 +46,7 @@ jobs:
           - arm64
         dev:
           - ''
-          - '1'
+          - 'dev'
         user_id:
           - 1000
           - 501
@@ -57,7 +57,7 @@ jobs:
             runner: ubuntu-24.04-arm
           - user_id: 501
             group_id: 20
-            dev: 1
+            dev: dev
         exclude:
           - dev: ''
             user_id: 501
@@ -90,7 +90,7 @@ jobs:
         python: ${{ fromJson(needs.setup.outputs.python-versions) }}
         dev:
           - ''
-          - '1'
+          - 'dev'
         user_id:
           - 1000
           - 501
