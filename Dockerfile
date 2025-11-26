@@ -165,7 +165,7 @@ RUN set -xe; \
 USER wodby
 
 WORKDIR ${APP_ROOT}
-EXPOSE 8000
+EXPOSE 8080
 
 COPY --chown=wodby:wodby gunicorn.init.d /etc/init.d/gunicorn
 COPY templates /etc/gotpl/
