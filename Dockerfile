@@ -31,7 +31,7 @@ RUN set -xe; \
 #    addgroup -g 82 -S www-data; \
     adduser -u 82 -D -S -G www-data www-data; \
     \
-    # Delete existing user/group if uid/gid occupied.
+    # Delete existing user/group if uid/gid occupied. \
     existing_group=$(getent group "${WODBY_GROUP_ID}" | cut -d: -f1); \
     if [[ -n "${existing_group}" ]]; then delgroup "${existing_group}"; fi; \
     existing_user=$(getent passwd "${WODBY_USER_ID}" | cut -d: -f1); \
@@ -80,7 +80,7 @@ RUN set -xe; \
         wget \
         yaml; \
     \
-    # Install redis-cli.
+    # Install redis-cli. \
     apk add --update --no-cache redis; \
     mv /usr/bin/redis-cli /tmp/; \
     apk del --purge redis; \
@@ -100,7 +100,7 @@ RUN set -xe; \
             postgresql-dev; \
     fi; \
     \
-    # Download helper scripts.
+    # Download helper scripts. \
     dockerplatform=${TARGETPLATFORM:-linux/amd64}; \
     gotpl_url="https://github.com/wodby/gotpl/releases/latest/download/gotpl-${dockerplatform/\//-}.tar.gz"; \
     wget -qO- "${gotpl_url}" | tar xz --no-same-owner -C /usr/local/bin; \
@@ -118,7 +118,9 @@ RUN set -xe; \
     cp /home/wodby/.shrc /home/wodby/.bashrc; \
     cp /home/wodby/.shrc /home/wodby/.bash_profile; \
     \
-    # Configure sudoers
+    curl -LsSf https://astral.sh/uv/install.sh | su-exec wodby sh; \
+    \
+    # Configure sudoers \
     { \
         echo "Defaults secure_path=\"$PATH\""; \
         echo 'Defaults env_keep += "APP_ROOT FILES_DIR"' ; \

@@ -26,7 +26,7 @@
 
 About images:
 
-- All images based on Alpine Linux
+- All images are based on Alpine Linux
 - Base image: [python](https://github.com/docker-library/python)
 - [GitHub actions builds](https://github.com/wodby/python/actions) 
 - [Docker Hub](https://hub.docker.com/r/wodby/python) 
@@ -103,9 +103,15 @@ All images built for `linux/amd64`, `-dev-macos` images additionally built for `
 
 Change `WODBY_USER_ID` and `WODBY_GROUP_ID` mainly for local dev version of images, if it matches with existing system user/group ids the latter will be deleted. 
 
+## Tools
+
+| Tool                            | all versions |
+|---------------------------------|--------------|
+| [UV](https://docs.astral.sh/uv) | latest       |
+
 ## Changelog
 
-Changes per stability tag reflected in git tags description under [releases](https://github.com/wodby/python/releases). 
+Changes per stability tag reflected in the git tags description under [releases](https://github.com/wodby/python/releases). 
 
 ## Crond
 
