@@ -23,5 +23,6 @@ echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> myapp/settings.py
 python manage.py collectstatic --no-input
 
 curl -s localhost:8080 | grep -q "${django_msg}"
+curl -s localhost:8080/_test/secret-key | grep -qx "expected-secret"
 curl -sH "Host: localhost" nginx | grep -q "${django_msg}"
 curl -sIH "Host: localhost" nginx/static/admin/css/base.css | grep -q "200 OK"

@@ -12,10 +12,6 @@ keepalive = {{ getenv "GUNICORN_KEEPALIVE" "2" }}
 spew = {{ getenv "GUNICORN_SPEW" "False" }}
 
 daemon = False
-raw_env = [
-    'DJANGO_SECRET_KEY=something',
-    'SPAM=eggs',
-]
 pidfile = None
 umask = 0
 tmp_upload_dir = None

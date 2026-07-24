@@ -24,6 +24,7 @@ services:
       args:
         IMAGE: $IMAGE
     environment:
+      DJANGO_SECRET_KEY: expected-secret
       SSH_DISABLE_STRICT_KEY_CHECKING: 1
       DEBUG: 1
       ROWS: 80
