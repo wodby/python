@@ -2,6 +2,8 @@ ARG PYTHON_VER
 
 FROM python:${PYTHON_VER}-alpine
 
+LABEL com.wodby.ci.cache="uv"
+
 ARG PYTHON_DEV
 
 ARG WODBY_USER_ID=1000
