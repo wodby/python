@@ -113,7 +113,7 @@ RUN set -xe; \
     mv /tmp/alpine/bin/* /usr/local/bin; \
     \
     { \
-        echo 'export PS1="\u@${WODBY_APP_NAME:-python}.${WODBY_ENVIRONMENT_NAME:-container}:\w $ "'; \
+        echo 'export PS1="\u@$(hostname):\w $ "'; \
         echo "export PATH=${PATH}"; \
     } | tee /home/wodby/.shrc; \
     \

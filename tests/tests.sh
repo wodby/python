@@ -6,6 +6,13 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
+source /home/wodby/.shrc
+expected_prompt='\u@'"$(hostname)"':\w $ '
+if [[ "${PS1}" != "${expected_prompt}" ]]; then
+    echo "Unexpected shell prompt: ${PS1}"
+    exit 1
+fi
+
 if [[ "${PYTHON_VERSION}" == 2* ]]; then
     python -V 2>&1 | grep -q "${PYTHON_VERSION}"
     django_msg="It worked!"
