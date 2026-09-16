@@ -1,0 +1,9 @@
+# The Dockerfile applies the upstream 3.10 XML hash-salt patch and tests both
+# XML parsers. The version-only binary matcher cannot see the backport.
+# https://github.com/python/cpython/commit/ea70712d1a8508e14e9677d44f838dab04dc0286
+ignore:
+  - vulnerability: CVE-2026-7210
+    package:
+      name: python
+      version: 3.10.21
+      type: binary
