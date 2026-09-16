@@ -1,6 +1,32 @@
 ARG PYTHON_VER
 
+FROM python:${PYTHON_VER}-alpine AS python-security
+
+ARG PYTHON_VER
+COPY patches/python310-xml-hash-salt.patch /tmp/python310-xml-hash-salt.patch
+
+# Backport the upstream XML hash-flooding fix until Python 3.10.22 is released.
+# Other Python versions keep the official interpreter unchanged.
+RUN set -eux; \
+    if [ "${PYTHON_VER}" = "3.10.21" ]; then \
+        apk add --no-cache build-base bzip2-dev gdbm-dev libffi-dev \
+            libnsl-dev libtirpc-dev linux-headers ncurses-dev openssl-dev \
+            readline-dev sqlite-dev tcl-dev tk-dev util-linux-dev xz-dev zlib-dev; \
+        wget -O /tmp/python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VER}/Python-${PYTHON_VER}.tar.xz"; \
+        echo 'a0da1e72132e950154eca0f6f47d5db828454700de20e5113667940d81e0db04  /tmp/python.tar.xz' | sha256sum -c -; \
+        mkdir /tmp/python-src; \
+        tar -xJf /tmp/python.tar.xz --strip-components=1 -C /tmp/python-src; \
+        cd /tmp/python-src; \
+        patch -p1 < /tmp/python310-xml-hash-salt.patch; \
+        ./configure --enable-shared --enable-loadable-sqlite-extensions --with-ensurepip; \
+        make -j2 EXTRA_CFLAGS='-DTHREAD_STACK_SIZE=0x100000'; \
+        make install; \
+        ./python -m test test_pyexpat test_xml_etree test_xml_etree_c; \
+        rm -rf /usr/local/lib/python3.10/test /usr/local/lib/libpython*.a; \
+    fi
+
 FROM python:${PYTHON_VER}-alpine
+COPY --from=python-security /usr/local/ /usr/local/
 
 LABEL com.wodby.ci.cache="uv"
 
@@ -31,6 +57,7 @@ ARG TARGETPLATFORM
 # Upgrade inherited packages even when their existing versions satisfy dependencies.
 RUN set -xe; \
     apk upgrade --no-cache; \
+    PIP_USER=0 python -m pip install --no-cache-dir --upgrade pip setuptools wheel; \
     \
 #    addgroup -g 82 -S www-data; \
     adduser -u 82 -D -S -G www-data www-data; \
