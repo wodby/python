@@ -28,7 +28,9 @@ ENV GUNICORN_APP="myapp.wsgi:application" \
 
 ARG TARGETPLATFORM
 
+# Upgrade inherited packages even when their existing versions satisfy dependencies.
 RUN set -xe; \
+    apk upgrade --no-cache; \
     \
 #    addgroup -g 82 -S www-data; \
     adduser -u 82 -D -S -G www-data www-data; \
