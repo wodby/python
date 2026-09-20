@@ -22,7 +22,10 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/python:3-X.X.X`) which correspond to [git tags](https://github.com/wodby/python/releases). We strongly recommend using images only with stability tags. 
+Use image revision tags such as `wodby/python:3.14-rN` to select a Wodby image revision.
+The `rN` suffix identifies the image revision separately from the upstream software version.
+See [release tags](https://github.com/wodby/python/tags) for available revisions and the [image revision policy](https://github.com/wodby/images#image-revisions) for upgrade guidance.
+Existing SemVer image tags remain available.
 
 About images:
 
@@ -108,7 +111,7 @@ Change `WODBY_USER_ID` and `WODBY_GROUP_ID` mainly for local dev version of imag
 
 ## Changelog
 
-Changes per stability tag reflected in the git tags description under [releases](https://github.com/wodby/python/releases). 
+For changes in each image revision, see the [release notes](https://github.com/wodby/python/releases).
 
 ## Crond
 
