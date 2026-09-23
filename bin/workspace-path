@@ -1,0 +1,13 @@
+#!/bin/sh
+# Reserve dependency/build storage without changing tracked ignore rules.
+set -eu
+cd "${APP_ROOT:-/usr/src/app}"
+root=$(git rev-parse --show-toplevel)
+[ "$(pwd -P)" = "$root" ] || { echo 'Workspace commands require the checkout root' >&2; exit 1; }
+[ ! -L .wodby-workspace ] || { echo '.wodby-workspace must not be a symlink' >&2; exit 1; }
+[ -z "$(git ls-files -- .wodby-workspace)" ] || { echo '.wodby-workspace is reserved; remove tracked files there' >&2; exit 1; }
+exclude=$(git rev-parse --git-path info/exclude)
+mkdir -p "$(dirname "$exclude")"
+grep -qxF '/.wodby-workspace/' "$exclude" 2>/dev/null || printf '\n/.wodby-workspace/\n' >> "$exclude"
+mkdir -p .wodby-workspace
+printf '%s/.wodby-workspace\n' "$root"
