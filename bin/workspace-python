@@ -1,0 +1,22 @@
+#!/bin/sh
+# Dependencies live on the shared checkout; the runner home stays private.
+set -eu
+cd "${APP_ROOT:-/usr/src/app}"
+state=$(workspace-path)
+export VIRTUAL_ENV="$state/venv" UV_PROJECT_ENVIRONMENT="$state/venv" PIP_USER=0
+export PATH="$VIRTUAL_ENV/bin:$PATH"
+export HOST="${HOST:-0.0.0.0}" PORT="${PORT:-8080}"
+export WATCHFILES_FORCE_POLLING="${WATCHFILES_FORCE_POLLING:-true}"
+case "${1:-}" in
+ prepare)
+  if [ -f uv.lock ]; then uv sync --locked
+  elif [ -f requirements.txt ]; then
+   python -m venv "$VIRTUAL_ENV"
+   "$VIRTUAL_ENV/bin/python" -m pip install -r requirements.txt
+  else echo 'Provide uv.lock with pyproject.toml or requirements.txt' >&2; exit 1; fi ;;
+ start)
+  [ -x "$VIRTUAL_ENV/bin/python" ] || { echo 'Run workspace preparation first' >&2; exit 1; }
+  if [ -n "${WORKSPACE_PYTHON_COMMAND:-}" ]; then exec sh -ec "$WORKSPACE_PYTHON_COMMAND"; fi
+  exec python -m gunicorn --bind "$HOST:$PORT" --reload --reload-engine poll "${GUNICORN_APP:-myapp.wsgi:application}" ;;
+ *) echo 'Usage: workspace-python prepare|start' >&2; exit 1 ;;
+esac

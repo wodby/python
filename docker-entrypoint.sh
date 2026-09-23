@@ -41,6 +41,15 @@ process_templates() {
     _gotpl "gunicorn.py.tmpl" "/usr/local/etc/gunicorn/config.py"
 }
 
+# Configuration-only startup never changes SSH/Git state or runs application hooks.
+if [[ "${1:-}" == --configure-runtime ]]; then
+    _gotpl "gunicorn.py.tmpl" "/usr/local/etc/gunicorn/config.py"
+    exit 0
+fi
+if [[ "${WODBY_WORKSPACE:-}" == 1 ]]; then
+    exec workspace-python start
+fi
+
 sudo init_container
 
 init_git

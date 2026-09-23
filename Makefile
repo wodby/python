@@ -86,6 +86,7 @@ buildx-imagetools-create:
 .PHONY: buildx-imagetools-create 
 
 test:
+	cd ./tests && IMAGE=$(REPO):$(TAG) bash ./workspace-contract.sh
 ifneq ($(PYTHON_DEV),)
 	cd ./tests && IMAGE=$(REPO):$(TAG) ./run.sh
 else

@@ -9,6 +9,7 @@ FROM ${BASE_IMAGE}
 LABEL com.wodby.ci.cache="uv"
 
 ARG PYTHON_DEV
+LABEL com.wodby.workspace.contract="${PYTHON_DEV:+1}"
 
 ARG WODBY_USER_ID=1000
 ARG WODBY_GROUP_ID=1000
@@ -128,7 +129,7 @@ RUN set -xe; \
     cp /home/wodby/.shrc /home/wodby/.bashrc; \
     cp /home/wodby/.shrc /home/wodby/.bash_profile; \
     \
-    curl -LsSf https://astral.sh/uv/install.sh | su-exec wodby sh; \
+    curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR=/usr/local/bin UV_NO_MODIFY_PATH=1 sh; \
     \
     # Configure sudoers \
     { \
@@ -186,3 +187,5 @@ COPY bin /usr/local/bin/
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/etc/init.d/gunicorn"]
+
+COPY workspace-profile.sh /etc/profile.d/workspace.sh
