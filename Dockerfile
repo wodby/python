@@ -97,6 +97,7 @@ RUN set -xe; \
     mv /tmp/redis-cli /usr/bin; \
     \
     if [[ -n "${PYTHON_DEV}" ]]; then \
+        apk add --no-cache ripgrep jq; \
         apk add --update --no-cache -t .wodby-python-build-deps \
             build-base \
             gcc \
