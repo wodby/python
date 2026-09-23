@@ -6,7 +6,7 @@ server=workspace-python-reload-$$
 cleanup() { docker rm -f "$server" >/dev/null 2>&1 || true; docker volume rm "$volume" >/dev/null; }
 trap cleanup EXIT
 docker volume create "$volume" >/dev/null
-docker run --rm --user 0 --entrypoint sh -v "$volume:/fixture" "$image" -ec 'chown 1000:1000 /fixture'
+docker run --rm --user 0 --entrypoint sh -v "$volume:/fixture" "$image" -ec 'chown wodby:wodby /fixture'
 docker run --rm --entrypoint sh -e APP_ROOT=/fixture -v "$volume:/fixture" "$image" -ec '
 cd /fixture
 git init -q
