@@ -1,32 +1,9 @@
-# Temporary acceptance of CVE-2026-7210 in the unpatched upstream Python 3.10.21.
-# Remove after adopting an official Python 3.10 image containing the XML hash-salt fix.
-# Tracked in https://github.com/wodby/python/issues/10
+# Python 3.11.17 contains the upstream tarfile fix, but the vulnerability data does not list a
+# fixed 3.11 release yet: https://github.com/python/cpython/pull/158455
+# Remove once the scan passes without it: https://github.com/wodby/python/issues/21
 ignore:
-  - vulnerability: CVE-2026-7210
-    package:
-      name: python
-      version: 3.10.21
-      type: binary
-  # Temporary acceptance until the official Python 3.10–3.13 images include the tarfile fix.
-  # https://github.com/python/cpython/pull/157192
-  # Remove after upgrading: https://github.com/wodby/python/issues/12
   - vulnerability: CVE-2026-82049
     package:
       name: python
-      version: 3.13.15
-      type: binary
-  - vulnerability: CVE-2026-82049
-    package:
-      name: python
-      version: 3.12.14
-      type: binary
-  - vulnerability: CVE-2026-82049
-    package:
-      name: python
-      version: 3.11.16
-      type: binary
-  - vulnerability: CVE-2026-82049
-    package:
-      name: python
-      version: 3.10.21
+      version: 3.11.17
       type: binary
