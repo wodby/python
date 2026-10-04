@@ -16,7 +16,6 @@ env:
   PYTHON313: '3.13.16'
   PYTHON312: '3.12.15'
   PYTHON311: '3.11.17'
-  PYTHON310: '3.10.22'
 
 jobs:
   setup:
@@ -31,8 +30,7 @@ jobs:
             {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": "latest", "latest_major": "3"},
             {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": "", "latest_major": ""},
             {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": "", "latest_major": ""},
-            {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": "", "latest_major": ""},
-            {"key": "python310", "version": "${{ env.PYTHON310 }}", "latest": "", "latest_major": ""}
+            {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": "", "latest_major": ""}
           ]
           EOF
           echo "python-versions=$(cat versions.json | jq -c .)" >> $GITHUB_OUTPUT

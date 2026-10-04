@@ -104,31 +104,6 @@
           "full": "{version}-dev-macos"
         }
       ]
-    },
-    {
-      "version": {
-        "env": "PYTHON310"
-      },
-      "variants": [
-        {
-          "short": [
-            "{minor}"
-          ],
-          "full": "{version}"
-        },
-        {
-          "short": [
-            "{minor}-dev"
-          ],
-          "full": "{version}-dev"
-        },
-        {
-          "short": [
-            "{minor}-dev-macos"
-          ],
-          "full": "{version}-dev-macos"
-        }
-      ]
     }
   ]
 }
