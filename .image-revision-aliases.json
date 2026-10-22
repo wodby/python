@@ -4,7 +4,7 @@
   "versions": [
     {
       "version": {
-        "env": "PYTHON314"
+        "env": "PYTHON315"
       },
       "variants": [
         {
@@ -25,6 +25,31 @@
           "short": [
             "{minor}-dev-macos",
             "{major}-dev-macos"
+          ],
+          "full": "{version}-dev-macos"
+        }
+      ]
+    },
+    {
+      "version": {
+        "env": "PYTHON314"
+      },
+      "variants": [
+        {
+          "short": [
+            "{minor}"
+          ],
+          "full": "{version}"
+        },
+        {
+          "short": [
+            "{minor}-dev"
+          ],
+          "full": "{version}-dev"
+        },
+        {
+          "short": [
+            "{minor}-dev-macos"
           ],
           "full": "{version}-dev-macos"
         }
