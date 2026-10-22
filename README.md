@@ -39,15 +39,18 @@ About images:
 
 Supported tags and respective `Dockerfile` links:
 
-- `3.14`, `3`, `latest` [_(Dockerfile)_]
+- `3.15`, `3`, `latest` [_(Dockerfile)_]
+- `3.14` [_(Dockerfile)_]
 - `3.13` [_(Dockerfile)_]
 - `3.12` [_(Dockerfile)_]
 - `3.11` [_(Dockerfile)_]
-- `3.14-dev`, `3-dev` [_(Dockerfile)_]
+- `3.15-dev`, `3-dev` [_(Dockerfile)_]
+- `3.14-dev` [_(Dockerfile)_]
 - `3.13-dev` [_(Dockerfile)_]
 - `3.12-dev` [_(Dockerfile)_]
 - `3.11-dev` [_(Dockerfile)_]
-- `3.14-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.15-dev-macos`, `3-dev-macos` [_(Dockerfile)_]
+- `3.14-dev-macos` [_(Dockerfile)_]
 - `3.13-dev-macos` [_(Dockerfile)_]
 - `3.12-dev-macos` [_(Dockerfile)_]
 - `3.11-dev-macos` [_(Dockerfile)_]
