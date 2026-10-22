@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  PYTHON314: '3.14.8'
+  PYTHON314: '3.14.9'
   PYTHON313: '3.13.16'
   PYTHON312: '3.12.15'
   PYTHON311: '3.11.17'
