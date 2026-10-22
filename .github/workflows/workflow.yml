@@ -12,6 +12,7 @@ on:
   pull_request:
 
 env:
+  PYTHON315: '3.15.1'
   PYTHON314: '3.14.9'
   PYTHON313: '3.13.17'
   PYTHON312: '3.12.15'
@@ -27,7 +28,8 @@ jobs:
         run: |
           cat << 'EOF' > versions.json
           [
-            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": "latest", "latest_major": "3"},
+            {"key": "python315", "version": "${{ env.PYTHON315 }}", "latest": "latest", "latest_major": "3"},
+            {"key": "python314", "version": "${{ env.PYTHON314 }}", "latest": "", "latest_major": ""},
             {"key": "python313", "version": "${{ env.PYTHON313 }}", "latest": "", "latest_major": ""},
             {"key": "python312", "version": "${{ env.PYTHON312 }}", "latest": "", "latest_major": ""},
             {"key": "python311", "version": "${{ env.PYTHON311 }}", "latest": "", "latest_major": ""}
