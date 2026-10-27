@@ -16,7 +16,7 @@ env:
   PYTHON314: '3.14.10'
   PYTHON313: '3.13.18'
   PYTHON312: '3.12.16'
-  PYTHON311: '3.11.17'
+  PYTHON311: '3.11.18'
 
 jobs:
   setup:
