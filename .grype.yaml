@@ -7,3 +7,13 @@ ignore:
       name: python
       version: 3.11.17
       type: binary
+
+  # CVE-2026-119170 is a hashlib regression that only affects Python 3.14.10 with OpenSSL in FIPS
+  # mode. The Alpine images do not run OpenSSL in FIPS mode, and Python 3.14.11 with the fix is not
+  # released yet: https://github.com/python/cpython/issues/160923
+  # The rule matches only 3.14.10; remove it when the images move to 3.14.11.
+  - vulnerability: CVE-2026-119170
+    package:
+      name: python
+      version: 3.14.10
+      type: binary
